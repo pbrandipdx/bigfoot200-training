@@ -78,15 +78,15 @@
 <tbody>
 <tr>
 <td>Time on feet</td>
-<td>~12 hr/week</td>
+<td><strong>8.8 hr/week measured</strong> (plan assumed ~12)</td>
 </tr>
 <tr>
 <td>Vertical</td>
-<td>~3,000 ft/week (60,748 ft YTD 2026)</td>
+<td><strong>~1,700 ft/week measured</strong> (plan assumed ~3,000) · 62,182 ft YTD 2026</td>
 </tr>
 <tr>
 <td>On-foot miles</td>
-<td>~40–45/week</td>
+<td><strong>~29/week measured</strong> (plan assumed 40–45)</td>
 </tr>
 <tr>
 <td>Longest single day</td>
@@ -94,7 +94,7 @@
 </tr>
 <tr>
 <td>Longest continuous effort</td>
-<td>2:59 (Wildwood hike)</td>
+<td>2:59 (Wildwood hike, Sep 5)</td>
 </tr>
 <tr>
 <td>Max HR</td>
@@ -105,27 +105,39 @@
 <td>121–140 / 141–163</td>
 </tr>
 <tr>
+<td>Resting HR</td>
+<td>51 (7-day avg 52)</td>
+</tr>
+<tr>
 <td>VO2 max</td>
-<td>42.0</td>
+<td>42.0 → <strong>~42–43</strong>, ticked up early September</td>
 </tr>
 <tr>
 <td>Night hours</td>
 <td>0</td>
 </tr>
 <tr>
-<td>Hill score</td>
-<td><strong>needed</strong></td>
+<td><strong>Hill score</strong></td>
+<td><strong>no data — Garmin has never computed one</strong></td>
 </tr>
 <tr>
-<td>Endurance score</td>
-<td><strong>needed</strong></td>
+<td><strong>Endurance score</strong></td>
+<td><strong>4,758</strong> (peak 5,088, 12-wk avg 4,999) — <em>falling</em></td>
 </tr>
 <tr>
-<td>Running tolerance</td>
-<td><strong>needed</strong></td>
+<td><strong>Running tolerance</strong></td>
+<td><strong>12 mi/week</strong>, actual 7-day 5.8 mi — "Low impact load"</td>
+</tr>
+<tr>
+<td>HRV status</td>
+<td><strong>Unbalanced since ~Sep 7</strong> (balanced 42–50 through Sep 5)</td>
 </tr>
 </tbody>
 </table></div>
+<p><em>Baselines measured 2026-09-11 from Strava and Garmin Connect; stored in the <code>bigfoot-200-training</code> Supabase project (<code>garmin_daily</code>, <code>garmin_training</code>, <code>activities</code>) with full provenance in each row's <code>raw</code>.</em></p>
+<blockquote>
+<p><strong>The plan was written off an overstated baseline.</strong> Time on feet, vertical and miles are all 27–43% below what the block targets were scaled from. Every target below inherits that error and should be read as aspirational rather than calibrated until rescaled.</p>
+</blockquote>
 <hr />
 <h2>Block 1 — Sep 7 to Dec 12 (14 weeks)</h2>
 <p><em>Ends: Frozen Trail Run Fest 50K · Checkpoint: Run the Rock 50K, Nov 7</em></p>
@@ -491,13 +503,66 @@
 <li><strong>Morning of a long day: 70+.</strong> Under 50, downgrade the session.</li>
 <li>Overnight recharge under 30 for three straight nights means accumulated fatigue</li>
 </ul>
-<h2>Garmin performance metrics — need your baseline</h2>
-<p>Once you paste the <code>--ranges-only</code> output I can set real thresholds. Provisional direction:</p>
+<h2>Garmin performance metrics — baselined 2026-09-11</h2>
+<p>All three are now measured. All three say the same thing: <strong>running-specific capacity has gone backwards since running stopped in late July.</strong></p>
+<h3>Hill score — <strong>no data</strong></h3>
+<p>Garmin has never computed one. It is derived from running on hills, and there has not been enough of that for the metric to exist. Your plan calls this "the most Bigfoot-relevant number Garmin produces"; right now it is blank, and the blankness <em>is</em> the finding.</p>
 <ul>
-<li><strong>Hill score</strong> — the most Bigfoot-relevant number Garmin produces. Should rise through every block. Flat or falling during a climbing block means the vert isn't being absorbed.</li>
-<li><strong>Endurance score</strong> — should rise steadily; expect the largest gains in Blocks 3–4.</li>
-<li><strong>Running tolerance</strong> — the injury guardrail. Weekly load should stay under it. Exceeding it repeatedly is the clearest overtraining signal available.</li>
+<li><strong>Threshold:</strong> get it to exist. One hilly run is enough to start it.</li>
+<li>Once it exists: should rise through every block. Flat or falling during a climbing block means the vert isn't being absorbed.</li>
 </ul>
+<h3>Endurance score — <strong>4,758, declining</strong></h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Week</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jul 25–31</td>
+<td>5,059</td>
+</tr>
+<tr>
+<td>Aug 8–14</td>
+<td>5,012</td>
+</tr>
+<tr>
+<td>Aug 15–21</td>
+<td>4,984</td>
+</tr>
+<tr>
+<td>Aug 22–28</td>
+<td>4,922</td>
+</tr>
+<tr>
+<td>Aug 29–Sep 4</td>
+<td>4,873</td>
+</tr>
+<tr>
+<td><strong>Sep 5–11</strong></td>
+<td><strong>4,758</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Peak 5,088 → 4,758. Down 330 points (−6.5%) over twelve weeks, and accelerating — the largest single drop was this week. Level: Intermediate.</p>
+<ul>
+<li><strong>Threshold:</strong> stop the decline by the end of September. Back above 5,000 by the Dec 12 Frozen Trail checkpoint.</li>
+<li>Three consecutive falling weeks during a build block means the block is not being absorbed — rebuild it rather than stacking on top.</li>
+</ul>
+<h3>Running tolerance — <strong>12 mi/week</strong></h3>
+<p>Acute impact load 4.9 mi · actual 7-day distance 5.8 mi · status <strong>"Low impact load."</strong> Garmin's own guidance: <em>"Your impact load has been low for several weeks. Increase impact load gradually after a lighter period like this."</em></p>
+<ul>
+<li><strong>Threshold:</strong> weekly running miles stay under tolerance. Exceeding it repeatedly is the clearest overtraining signal available.</li>
+<li><strong>The gap that matters:</strong> Run the Rock is 31 running miles on Nov 7, eight weeks out, against a current tolerance of 12. Gorge Waterfalls is 62 miles against a 17-hour cutoff in April. Neither is a hiking event.</li>
+<li>Raise it by frequency, not by one big day. Three easy midweek runs — which is what you were doing through Jul 21 — plus running the runnable parts of the Saturday long day.</li>
+</ul>
+<h3>Why all three moved together</h3>
+<p>Running stopped around Jul 22. Aerobic fitness is fine — VO2 max ticked <em>up</em> to ~42–43, sleep is good, body battery recovers to ~79. What has degraded is running-specific capacity, which is a different thing and the thing the race ladder actually requires.</p>
+<h3>HRV — first real signal, 2026-09-11</h3>
+<p>Balanced at 42–50 ms inside the baseline band through ~Sep 5. <strong>Unbalanced from ~Sep 7</strong> at 35–38, below the band, with one Low day around Sep 9 — beginning two days after Block 1 opened and acute training load climbed from ~200 to ~300 (top edge of optimal). Sleep and body battery are unaffected so far.</p>
+<p>Under the HRV rules above, five days of Unbalanced is not yet the three-days-off trigger, but a seventh consecutive day is.</p>
 <hr />
 <h2>Non-negotiables</h2>
 <ol>
