@@ -95,6 +95,17 @@
 </style>
 </head>
 <body>
+
+<style id="bf-nav-css">
+  #bf-nav{position:sticky;top:0;z-index:999;display:flex;gap:0;background:#152B1D;
+    border-bottom:1px solid rgba(255,255,255,.14);overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #bf-nav a{flex:1 0 auto;text-align:center;padding:13px 16px;font:600 13px/1
+    -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;letter-spacing:.02em;
+    color:#B9C6B4;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent}
+  #bf-nav a[aria-current="page"]{color:#FBFBF8;border-bottom-color:#B0793A}
+  @media (max-width:420px){#bf-nav a{padding:12px 11px;font-size:12px}}
+</style>
+<nav id="bf-nav"><a href="index.html" aria-current="page">Today</a><a href="log.html">Log</a><a href="blocks.html">Blocks</a><a href="plan.html">Race plan</a></nav>
 <div class="wrap">
 
   <header class="top">
@@ -149,24 +160,10 @@
 </div>
 
 <script>
-const BLOCKS = [
-  { id:1, name:'Block 1 — base + vertical intro', start:'2026-09-01', end:'2026-12-12' },
-  { id:2, name:'Block 2 — build',                  start:'2026-12-13', end:'2027-04-16' },
-  { id:3, name:'Block 3 — specific prep',           start:'2027-04-17', end:'2027-06-19' },
-  { id:4, name:'Block 4 — peak + taper',            start:'2027-06-20', end:'2027-08-13' },
-];
+const DATA = {"race":{"name":"Bigfoot 200","date":"2027-08-13","goal":"sub-100hr","schedule":"97:00"},"blocks":[{"id":1,"name":"Block 1 — base + vertical intro","start":"2026-09-07","end":"2026-12-12","vert":"5,000 ft","hours":"15 hr/wk","endsWith":"Frozen Trail Run Fest 50K"},{"id":2,"name":"Block 2 — build","start":"2026-12-13","end":"2027-02-13","vert":"6,500 ft","hours":"17 hr/wk","endsWith":"Hagg Mud 50K"},{"id":3,"name":"Block 3 — night running","start":"2027-02-14","end":"2027-04-16","vert":"8,000 ft","hours":"19 hr/wk","endsWith":"Gorge Waterfalls 100K"},{"id":4,"name":"Block 4 — the gate","start":"2027-04-17","end":"2027-06-18","vert":"10,000 ft","hours":"21 hr/wk","endsWith":"Bighorn 100"},{"id":5,"name":"Block 5 — peak + taper","start":"2027-06-19","end":"2027-08-13","vert":"12,000 ft","hours":"22–24 hr/wk","endsWith":"BIGFOOT 200","taper":true}],"races":[{"name":"Three Sisters Loop","start":"2026-10-02","end":"2026-10-05","tag":"multi-day · first sleep-stop practice"},{"name":"Run the Rock 50K","start":"2026-11-07","end":"2026-11-07","tag":"Block 1 checkpoint · 3.2 mph, finish upright"},{"name":"West Linn Turkey Trot","start":"2026-11-26","end":"2026-11-26","tag":"tune-up"},{"name":"St. Jude Memphis Half Marathon","start":"2026-12-05","end":"2026-12-05","tag":"tune-up"},{"name":"Frozen Trail Run Fest 50K","start":"2026-12-12","end":"2026-12-12","tag":"Block 1 checkpoint"},{"name":"BURT 100","start":"2027-02-06","end":"2027-02-06","tag":"pencilled in · first 100-miler · 54K loop ×3, Bainbridge Island WA"},{"name":"Hagg Mud 50K","start":"2027-02-15","end":"2027-02-15","tag":"tune-up · date approximate"},{"name":"Gorge Waterfalls 100K","start":"2027-04-16","end":"2027-04-16","tag":"WS qualifier · 17 hr cutoff · Block 3 checkpoint"},{"name":"Bighorn 100","start":"2027-06-18","end":"2027-06-19","tag":"WS qualifier · the gate · finish under 30 hr"},{"name":"Bigfoot 200","start":"2027-08-13","end":"2027-08-13","tag":"A race · 97:00 schedule, sub-100 goal"}]};
+const BLOCKS = DATA.blocks;
 
-const RACES = [
-  { name:'Three Sisters Loop',            start:'2026-10-02', end:'2026-10-05', tag:'multi-day · first sleep-stop practice' },
-  { name:'Run the Rock 50K',              start:'2026-11-07', end:'2026-11-07', tag:'tune-up' },
-  { name:'West Linn Turkey Trot',         start:'2026-11-26', end:'2026-11-26', tag:'tune-up' },
-  { name:'St. Jude Memphis Half Marathon',start:'2026-12-05', end:'2026-12-05', tag:'tune-up' },
-  { name:'Frozen Trail Run Fest 50K',     start:'2026-12-12', end:'2026-12-12', tag:'Block 1 checkpoint' },
-  { name:'Hagg Mud 50K',                  start:'2027-02-15', end:'2027-02-15', tag:'tune-up · date approximate' },
-  { name:'Gorge Waterfalls 100K',         start:'2027-04-16', end:'2027-04-16', tag:'WS qualifier · Block 2 checkpoint' },
-  { name:'Bighorn 100',                   start:'2027-06-18', end:'2027-06-19', tag:'WS qualifier · Block 3 dress rehearsal' },
-  { name:'Bigfoot 200',                   start:'2027-08-13', end:'2027-08-13', tag:'A race · goal: sub-100hr' },
-];
+const RACES = DATA.races;
 
 function toDate(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
 function daysBetween(a,b){ return Math.round((b-a)/86400000); }
@@ -205,13 +202,12 @@ function saturdayWorkout(block, d){
     if(s <= '2026-11-07') return { title:'Taper into Run the Rock 50K', desc:'Short and easy — race is today or this week.' };
     return { title:'Long day, vertical-focused', desc:'Block 1 continues building toward the Dec 12 Frozen Trail 50K checkpoint.' };
   }
-  const targets = { 2:'5,000–6,000 ft', 3:'6,000–8,000+ ft', 4:'maintain, then taper' };
   const nth = ordinalSaturdayOfMonth(d);
-  if(block.id !== 4){
+  if(!block.taper){
     if(nth === 1) return { title:'Overnight long day', desc:'Evening/night start (~9pm–3am) — night-running exposure, targeting the overnight fade window seen in the split data.' };
-    if(nth === 3) return { title:'Back-to-back weekend — Saturday', desc:`Long day, target ${targets[block.id]} of vertical. Put the hardest climbing in the back half of the day, not the front. Followed by a genuinely long Sunday.` };
+    if(nth === 3) return { title:'Back-to-back weekend — Saturday', desc:`Long day, target ${block.vert} of vertical. Put the hardest climbing in the back half of the day, not the front. Followed by a genuinely long Sunday.` };
   }
-  return { title:'Long day, vertical-focused', desc:`Target ${targets[block.id]} of vertical this block. Hardest climbing goes in the back half of the day.` };
+  return { title:'Long day, vertical-focused', desc:`Target ${block.vert} of vertical this block. Hardest climbing goes in the back half of the day.` };
 }
 
 function fmtIso(d){
