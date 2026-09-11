@@ -229,13 +229,13 @@ function sundayWorkout(block, d){
 
 function thursdayWorkout(block){
   if(block.id === 1){
-    return { title:'LeBron ramp repeats', desc:'10–12 reps, run up / walk down, 150–160 bpm, ~800–950 ft vertical.' };
+    return { title:'LeBron ramp repeats', desc:'10–12 reps, run up / walk down, 150–160 bpm. Real vertical here is modest (~250–300 ft) \u2014 Monday\u2019s incline intervals are the actual vertical-volume session; this one is about real-terrain movement.' };
   }
   const wk = weekOfBlock(block);
   if(wk % 2 === 0){
-    return { title:'LeBron ramp — down-focus', desc:'Walk up conservatively, run down under control at race effort. Builds the eccentric quad durability the course\u2019s 45,563 ft of descent demands.' };
+    return { title:'LeBron ramp — down-focus', desc:'Walk up conservatively, run down under control at race effort. Builds the eccentric quad durability the course\u2019s 45,563 ft of descent demands \u2014 the point isn\u2019t vertical volume, it\u2019s the descent itself.' };
   }
-  return { title:'LeBron ramp — up-focus', desc:'Run up, walk down, 150–160 bpm.' };
+  return { title:'LeBron ramp — up-focus', desc:'Run up, walk down, 150–160 bpm. Real-terrain movement, not a vertical-volume session \u2014 Monday\u2019s incline intervals cover that.' };
 }
 
 function scheduleFor(date){
