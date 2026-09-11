@@ -1,0 +1,59 @@
+name: Rebuild site from bigfoot-200
+
+# This repo is a VIEW. Its pages are generated from pbrandipdx/bigfoot-200.
+# This workflow clones that repo, runs its build, and commits any change here —
+# so edits made in the GitHub web editor (or from a phone) reach the live site
+# without anyone running `make sync` on a Mac.
+#
+# No secrets: bigfoot-200 is public, so cloning needs no auth, and pushing here
+# uses the built-in GITHUB_TOKEN.
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'      # every 15 minutes
+  workflow_dispatch:             # "Run workflow" button, for an immediate rebuild
+  push:
+    branches: [main]
+    paths-ignore: ['**.html']    # don't retrigger on our own output
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this repo (the view)
+        uses: actions/checkout@v4
+        with:
+          path: bigfoot200-training
+
+      - name: Check out the source of truth
+        uses: actions/checkout@v4
+        with:
+          repository: pbrandipdx/bigfoot-200
+          path: bigfoot-200
+
+      - name: Build
+        run: python3 bigfoot-200/dashboard/build.py
+        # build.py resolves its output to the sibling bigfoot200-training/ dir.
+        # It uses only the Python standard library — no pip install needed.
+
+      - name: Commit and push if anything changed
+        working-directory: bigfoot200-training
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "no change — site already matches bigfoot-200"
+          else
+            SRC=$(git -C ../bigfoot-200 rev-parse --short HEAD)
+            git commit -m "Rebuild from bigfoot-200@${SRC}"
+            git push
+            echo "pushed rebuild from bigfoot-200@${SRC}"
+          fi

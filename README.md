@@ -6,6 +6,19 @@ Four pages: **Today** (this week's schedule and next race), **Log** (weekly Stra
 rollups and charts), **Blocks** (block targets and monitors), **Race plan** (the
 97:00 pacing schedule).
 
+## Rebuilds itself
+
+A GitHub Action (`.github/workflows/rebuild.yml`) clones `pbrandipdx/bigfoot-200`,
+runs its build, and commits any change here — every 15 minutes, and on demand via
+the **Run workflow** button on the Actions tab.
+
+So you can edit `plan/schedule.json` or the plan markdown in the GitHub web editor,
+from any device, and the live site catches up within 15 minutes. No Mac required.
+`make sync` on a Mac is still the fast path — it publishes immediately.
+
+No secrets are involved: `bigfoot-200` is public so cloning needs no auth, and the
+built-in `GITHUB_TOKEN` pushes here.
+
 ## This repo is generated — do not edit it
 
 Every `.html` file here is overwritten by `make dashboard` in the private
