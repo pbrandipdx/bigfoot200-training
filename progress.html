@@ -63,6 +63,73 @@
 <h1>Week over week</h1>
 <p>Generated 2026-09-12 from Supabase <code>weekly_progress</code> (activities + garmin_daily + garmin_training, Monday-start weeks, America/Los_Angeles).</p>
 <p>Read the arrows as direction, not verdict: <code>^</code> up, <code>v</code> down, <code>=</code> level, <code>!</code> means the direction is the wrong one.</p>
+<h2>Finish odds</h2>
+<p><strong>27–39%</strong> — <em>behind</em>, 47 weeks out.</p>
+<p>That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against Block 5's targets. Separately, you are at <strong>51% of what Block 1 asks for right now</strong> — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Weight</th>
+<th>vs Block 1 now</th>
+<th>Projected race day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vertical per week</td>
+<td>20%</td>
+<td><code>#####.....</code> 49%</td>
+<td><code>####......</code> 41%</td>
+</tr>
+<tr>
+<td>Longest single day</td>
+<td>20%</td>
+<td><code>####......</code> 38%</td>
+<td><code>####......</code> 36%</td>
+</tr>
+<tr>
+<td>Time on feet per week</td>
+<td>15%</td>
+<td><code>##########</code> 100%</td>
+<td><code>########..</code> 76%</td>
+</tr>
+<tr>
+<td>Run-specific capacity</td>
+<td>15%</td>
+<td><code>###.......</code> 29%</td>
+<td><code>####......</code> 38%</td>
+</tr>
+<tr>
+<td>Night hours</td>
+<td>10%</td>
+<td><code>..........</code> 0%</td>
+<td><code>..........</code> 0%</td>
+</tr>
+<tr>
+<td>Week-to-week consistency</td>
+<td>10%</td>
+<td><code>########..</code> 75%</td>
+<td><code>########..</code> 75%</td>
+</tr>
+<tr>
+<td>Recovery headroom</td>
+<td>10%</td>
+<td><code>#######...</code> 74%</td>
+<td><code>#######...</code> 74%</td>
+</tr>
+<tr>
+<td><strong>Readiness</strong></td>
+<td></td>
+<td><strong>51%</strong></td>
+<td><strong>47%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Biggest drags on the trajectory number: <strong>Night hours</strong> and <strong>Run-specific capacity</strong>.</p>
+<blockquote>
+<p><strong>How this is built.</strong> Seven gates, each measured from Strava and Garmin, weighted as shown, averaged into a readiness score. The <em>now</em> column compares the last four to eight weeks against the current block's targets. The <em>projected</em> column fits the slope of the last eight weeks and carries it to race day against Block 5's targets — it assumes you keep improving at exactly the rate you have been, no faster and no slower, which is why a flat eight weeks shows up as a flat projection. The readiness score is entirely measured. Turning it into a percentage needs a field-wide finish rate, and that part is an assumption: base rate 45–65% assumed for a 200-mile mountain race — Destination Trail does not publish starter counts. Read the gate breakdown and the direction as signal; read the percentage as a rough band.</p>
+</blockquote>
 <h2>Last complete week — 2026-08-31</h2>
 <div class="tw"><table>
 <thead>
@@ -78,21 +145,21 @@
 <tr>
 <td>Hours</td>
 <td>12.1 v!</td>
-<td>12.9</td>
+<td>13.8</td>
 <td>12</td>
 <td>101%</td>
 </tr>
 <tr>
 <td>Miles</td>
 <td>39.6 ^</td>
-<td>30.3</td>
+<td>33.7</td>
 <td>45</td>
 <td>88%</td>
 </tr>
 <tr>
 <td>Vert (ft)</td>
 <td>2927 ^</td>
-<td>1348</td>
+<td>1453</td>
 <td>3500</td>
 <td>84%</td>
 </tr>
@@ -185,9 +252,9 @@
 </tr>
 <tr>
 <td>2026-08-24</td>
-<td>12.9</td>
-<td>30.3</td>
-<td>1348</td>
+<td>13.8</td>
+<td>33.7</td>
+<td>1453</td>
 <td>1.7</td>
 <td>1.7</td>
 <td>42.3</td>
@@ -198,9 +265,9 @@
 </tr>
 <tr>
 <td>2026-08-17</td>
-<td>10.3</td>
-<td>27.1</td>
-<td>1020</td>
+<td>9.4</td>
+<td>23.8</td>
+<td>915</td>
 <td>—</td>
 <td>1.9</td>
 <td>51</td>
@@ -211,9 +278,9 @@
 </tr>
 <tr>
 <td>2026-08-10</td>
-<td>11.2</td>
-<td>28.8</td>
-<td>1299</td>
+<td>12.7</td>
+<td>34.1</td>
+<td>1519</td>
 <td>—</td>
 <td>1.9</td>
 <td>37.7</td>
@@ -224,9 +291,9 @@
 </tr>
 <tr>
 <td>2026-08-03</td>
-<td>8.7</td>
-<td>22.8</td>
-<td>1962</td>
+<td>7.3</td>
+<td>17.5</td>
+<td>1742</td>
 <td>—</td>
 <td>1.8</td>
 <td>47.5</td>
@@ -237,9 +304,9 @@
 </tr>
 <tr>
 <td>2026-07-27</td>
-<td>11.8</td>
-<td>24.6</td>
-<td>2562</td>
+<td>12.7</td>
+<td>28</td>
+<td>2694</td>
 <td>—</td>
 <td>3</td>
 <td>40.9</td>
@@ -250,9 +317,9 @@
 </tr>
 <tr>
 <td>2026-07-20</td>
-<td>13.1</td>
-<td>26.8</td>
-<td>1050</td>
+<td>13.2</td>
+<td>26.9</td>
+<td>1119</td>
 <td>4.5</td>
 <td>1.4</td>
 <td>37.8</td>
@@ -263,9 +330,9 @@
 </tr>
 <tr>
 <td>2026-07-13</td>
-<td>11.6</td>
-<td>34.2</td>
-<td>1880</td>
+<td>10.9</td>
+<td>32</td>
+<td>1752</td>
 <td>18.7</td>
 <td>1.7</td>
 <td>41.1</td>
@@ -276,9 +343,9 @@
 </tr>
 <tr>
 <td>2026-07-06</td>
-<td>10.7</td>
-<td>22.2</td>
-<td>1962</td>
+<td>11.4</td>
+<td>24.3</td>
+<td>2103</td>
 <td>1.3</td>
 <td>2.1</td>
 <td>40</td>
@@ -289,9 +356,9 @@
 </tr>
 <tr>
 <td>2026-06-29</td>
-<td>12.5</td>
-<td>36.7</td>
-<td>1398</td>
+<td>11.8</td>
+<td>34.6</td>
+<td>1280</td>
 <td>18.7</td>
 <td>1.1</td>
 <td>42.2</td>
@@ -317,7 +384,7 @@
 <td>2026-06-15</td>
 <td>7.7</td>
 <td>30.7</td>
-<td>2037</td>
+<td>2011</td>
 <td>20.5</td>
 <td>2.1</td>
 <td>48.4</td>
