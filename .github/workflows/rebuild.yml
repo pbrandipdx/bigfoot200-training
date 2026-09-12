@@ -1,12 +1,17 @@
 name: Rebuild site from bigfoot-200
 
 # This repo is a VIEW. Its pages are generated from pbrandipdx/bigfoot-200.
-# This workflow clones that repo, runs its build, and commits any change here —
+# This workflow gets that repo, runs its build, and commits any change here —
 # so edits made in the GitHub web editor (or from a phone) reach the live site
 # without anyone running `make sync` on a Mac.
 #
-# No secrets: bigfoot-200 is public, so cloning needs no auth, and pushing here
-# uses the built-in GITHUB_TOKEN.
+# Reading the source repo needs ONE of:
+#   a) pbrandipdx/bigfoot-200 is PUBLIC — nothing else to do, or
+#   b) a fine-grained PAT with Contents:read on bigfoot-200, stored in this
+#      repo as the secret SOURCE_REPO_TOKEN.
+# The built-in GITHUB_TOKEN is scoped to THIS repo only and cannot read a
+# private bigfoot-200. The preflight step below says so in one line rather
+# than letting actions/checkout retry for half a minute.
 
 on:
   schedule:
@@ -32,11 +37,39 @@ jobs:
         with:
           path: bigfoot200-training
 
+      - name: Preflight — can this job read the source repo?
+        env:
+          SRC_TOKEN: ${{ secrets.SOURCE_REPO_TOKEN }}
+        run: |
+          set -u
+          if [ -n "${SRC_TOKEN:-}" ]; then
+            code=$(curl -sS -o /dev/null -w '%{http_code}' \
+              -H "Authorization: Bearer $SRC_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/pbrandipdx/bigfoot-200)
+            how="with SOURCE_REPO_TOKEN"
+          else
+            code=$(curl -sS -o /dev/null -w '%{http_code}' \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/pbrandipdx/bigfoot-200)
+            how="anonymously"
+          fi
+          if [ "$code" = "200" ]; then
+            echo "source repo readable $how"
+            exit 0
+          fi
+          echo "::error::GitHub returned HTTP $code for pbrandipdx/bigfoot-200 ($how). \
+          A 404 anonymously means the source repo is private. Either make it public, \
+          or add a fine-grained PAT with Contents:read on bigfoot-200 as the repo \
+          secret SOURCE_REPO_TOKEN."
+          exit 1
+
       - name: Check out the source of truth
         uses: actions/checkout@v4
         with:
           repository: pbrandipdx/bigfoot-200
           path: bigfoot-200
+          token: ${{ secrets.SOURCE_REPO_TOKEN || github.token }}
 
       - name: Build
         run: python3 bigfoot-200/dashboard/build.py
