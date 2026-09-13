@@ -28,6 +28,11 @@
     border-left:3px solid var(--amber);border-radius:0 6px 6px 0}
   blockquote p{margin:6px 0;font-size:14.5px}
   code{background:var(--paper-2);padding:1px 5px;border-radius:4px;font-size:.88em}
+  .trend{display:inline-block;width:1.1em;text-align:center;font-weight:700;
+    line-height:1;cursor:help;font-size:1.05em}
+  .trend-good{color:#2E7D46}
+  .trend-bad{color:#A23B2C}
+  .trend-level{color:#8A9585;font-weight:500}
   pre{background:var(--paper-2);padding:12px;border-radius:8px;overflow-x:auto}
   pre code{background:none;padding:0}
   .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0;
@@ -61,8 +66,8 @@
 <nav id="bf-nav"><a href="index.html">Today</a><a href="progress.html" aria-current="page">Progress</a><a href="log.html">Log</a><a href="blocks.html">Blocks</a><a href="plan.html">Race plan</a></nav>
 <main class="doc">
 <h1>Week over week</h1>
-<p>Generated 2026-09-12 from Supabase <code>weekly_progress</code> (activities + garmin_daily + garmin_training, Monday-start weeks, America/Los_Angeles).</p>
-<p>Read the arrows as direction, not verdict: <code>^</code> up, <code>v</code> down, <code>=</code> level, <code>!</code> means the direction is the wrong one.</p>
+<p>Generated 2026-09-13 from Supabase <code>weekly_progress</code> (activities + garmin_daily + garmin_training, Monday-start weeks, America/Los_Angeles).</p>
+<p>Arrows compare with the previous week. <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span> and <span class="trend trend-good" title="down on last week - the direction you want" aria-label="down on last week - the direction you want">↓</span> are moving the way you want, <span class="trend trend-bad" title="up on last week - the wrong direction" aria-label="up on last week - the wrong direction">↑</span> and <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span> the wrong way, <span class="trend trend-level" title="level with last week" aria-label="level with last week">→</span> is unchanged. Hover any arrow for what it means.</p>
 <h2>Finish odds</h2>
 <p><strong>27–39%</strong> — <em>behind</em>, 47 weeks out.</p>
 <p>That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against Block 5's targets. Separately, you are at <strong>51% of what Block 1 asks for right now</strong> — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.</p>
@@ -79,44 +84,44 @@
 <tr>
 <td>Vertical per week</td>
 <td>20%</td>
-<td><code>#####.....</code> 49%</td>
-<td><code>####......</code> 41%</td>
+<td><code>█████░░░░░</code> 49%</td>
+<td><code>████░░░░░░</code> 41%</td>
 </tr>
 <tr>
 <td>Longest single day</td>
 <td>20%</td>
-<td><code>####......</code> 38%</td>
-<td><code>####......</code> 36%</td>
+<td><code>████░░░░░░</code> 38%</td>
+<td><code>████░░░░░░</code> 36%</td>
 </tr>
 <tr>
 <td>Time on feet per week</td>
 <td>15%</td>
-<td><code>##########</code> 100%</td>
-<td><code>########..</code> 76%</td>
+<td><code>██████████</code> 100%</td>
+<td><code>████████░░</code> 76%</td>
 </tr>
 <tr>
 <td>Run-specific capacity</td>
 <td>15%</td>
-<td><code>###.......</code> 29%</td>
-<td><code>####......</code> 38%</td>
+<td><code>███░░░░░░░</code> 29%</td>
+<td><code>████░░░░░░</code> 38%</td>
 </tr>
 <tr>
 <td>Night hours</td>
 <td>10%</td>
-<td><code>..........</code> 0%</td>
-<td><code>..........</code> 0%</td>
+<td><code>░░░░░░░░░░</code> 0%</td>
+<td><code>░░░░░░░░░░</code> 0%</td>
 </tr>
 <tr>
 <td>Week-to-week consistency</td>
 <td>10%</td>
-<td><code>########..</code> 75%</td>
-<td><code>########..</code> 75%</td>
+<td><code>████████░░</code> 75%</td>
+<td><code>████████░░</code> 75%</td>
 </tr>
 <tr>
 <td>Recovery headroom</td>
 <td>10%</td>
-<td><code>#######...</code> 74%</td>
-<td><code>#######...</code> 74%</td>
+<td><code>███████░░░</code> 74%</td>
+<td><code>███████░░░</code> 74%</td>
 </tr>
 <tr>
 <td><strong>Readiness</strong></td>
@@ -144,56 +149,56 @@
 <tbody>
 <tr>
 <td>Hours</td>
-<td>12.1 v!</td>
+<td>12.1 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
 <td>13.8</td>
 <td>12</td>
 <td>101%</td>
 </tr>
 <tr>
 <td>Miles</td>
-<td>39.6 ^</td>
+<td>39.6 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
 <td>33.7</td>
 <td>45</td>
 <td>88%</td>
 </tr>
 <tr>
 <td>Vert (ft)</td>
-<td>2927 ^</td>
+<td>2927 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
 <td>1453</td>
 <td>3500</td>
 <td>84%</td>
 </tr>
 <tr>
 <td>Longest day (hr)</td>
-<td>3 ^</td>
+<td>3 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
 <td>1.7</td>
 <td>8</td>
 <td>38%</td>
 </tr>
 <tr>
 <td>Running miles</td>
-<td>2 ^</td>
+<td>2 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
 <td>1.7</td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>HRV avg</td>
-<td>36.5 v!</td>
+<td>36.5 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
 <td>42.3</td>
 <td>41.6 baseline</td>
 <td>88%</td>
 </tr>
 <tr>
 <td>Resting HR</td>
-<td>52.7 ^!</td>
+<td>52.7 <span class="trend trend-bad" title="up on last week - the wrong direction" aria-label="up on last week - the wrong direction">↑</span></td>
 <td>51.1</td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Endurance score</td>
-<td>4883 v!</td>
+<td>4883 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
 <td>4941</td>
 <td>—</td>
 <td>—</td>
