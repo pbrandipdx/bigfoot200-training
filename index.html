@@ -69,12 +69,41 @@
     max-width:14ch;
   }
   .today-desc{font-size:17px;color:var(--ink-soft);max-width:58ch;margin-bottom:6px}
+  .today-desc.has-parts{font-size:15px;max-width:72ch}
+  .today-desc.has-parts .spart-k{flex-basis:88px;font-size:10px}
+  .today-desc.has-parts .spart-v{font-size:14.5px}
+  .today-desc.has-parts .mv-n{font-size:14.5px}
   a.routelink{display:block;width:fit-content;margin-top:5px;font-size:12.5px;
     color:var(--amber-deep);text-decoration:none;
     border-bottom:1px solid rgba(122,82,31,.35)}
   a.routelink::before{content:'\2197\00a0';font-size:11px}
   a.routelink:hover{border-bottom-color:var(--amber-deep)}
   #today-route a.routelink{font-size:13.5px;margin-top:10px}
+  /* Structured sessions. A day used to print one paragraph; it now lays out a
+     run portion, a workout portion with its own movement list, an indoor
+     alternative. Labels are the scan line - you should be able to find the run
+     without reading the prose. */
+  .sparts{display:block;margin-top:5px}
+  .spart{display:flex;gap:10px;align-items:baseline;margin-top:5px}
+  .spart-k{flex:0 0 74px;font-size:9.5px;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--amber-deep);padding-top:2px;line-height:1.35}
+  .spart-v{flex:1 1 auto;color:var(--ink-soft);font-size:12.6px;line-height:1.5}
+  .spart-indoors .spart-k,.spart-ifovertolerance .spart-k{color:var(--ink-faint)}
+  .spart-indoors .spart-v,.spart-ifovertolerance .spart-v{color:var(--ink-faint);font-size:12px}
+  ul.mvs{list-style:none;margin:5px 0 0;padding:0}
+  ul.mvs li{display:flex;flex-wrap:wrap;gap:3px 10px;align-items:baseline;
+    padding:3px 0 3px 11px;border-left:2px solid rgba(199,204,190,.85)}
+  .mv-n{font-weight:600;color:var(--ink)}
+  .mv-s{color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  a.mv-d{font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--amber-deep);text-decoration:none;border-bottom:1px solid rgba(122,82,31,.35)}
+  a.mv-d::before{content:'\25B7\00a0';font-size:9px}
+  a.mv-d:hover{border-bottom-color:var(--amber-deep)}
+  @media(max-width:600px){
+    .spart{display:block}
+    .spart-k{margin-bottom:1px}
+    .spart-v{font-size:12.4px}
+  }
   .today-meta{display:flex;gap:22px;flex-wrap:wrap;margin:22px 0 8px;font-size:13px;color:var(--ink-faint)}
   .today-meta strong{color:var(--ink)}
 
@@ -128,6 +157,26 @@
   ol.ladder .lwhen{width:110px;flex-shrink:0;font-size:13px;color:var(--ink-faint);padding-top:1px}
   ol.ladder .lname{font-weight:500}
   ol.ladder .ltag{font-size:12px;color:var(--amber-deep);margin-top:2px}
+  ol.ladder .lbadge{display:inline-block;margin-left:7px;padding:1px 6px;border-radius:3px;
+    font-size:10px;font-weight:700;letter-spacing:.06em;vertical-align:1px;
+    background:#eceae4;color:#6b6659}
+  ol.ladder li.backup .lname{color:var(--ink-faint);font-weight:400}
+  ol.ladder .lsignup{margin-top:5px}
+  ol.ladder .lsignup:empty{display:none}
+  a.signup{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;
+    font-weight:600;letter-spacing:.03em;text-decoration:none;border:1px solid transparent}
+  a.signup:hover{text-decoration:underline}
+  a.signup.sg-open{background:var(--forest-deep,#2f5d3a);color:#fff}
+  a.signup.sg-soon{background:#fff3d6;color:#8a5a00;border-color:#e0c68a}
+  a.signup.sg-tba{background:#f2f1ec;color:#6b6659;border-color:#ddd9cf}
+  a.signup.sg-shut{background:#f7e9e6;color:#96392b;border-color:#e3c2bb}
+  .sg-note{font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.45;max-width:52ch}
+  @media (prefers-color-scheme:dark){
+    ol.ladder .lbadge{background:#33322d;color:#a09a8c}
+    a.signup.sg-soon{background:#3a2f16;color:#e8c77a;border-color:#5a4a22}
+    a.signup.sg-tba{background:#2c2b27;color:#a09a8c;border-color:#403e38}
+    a.signup.sg-shut{background:#3a2420;color:#e0a093;border-color:#5c332b}
+  }
   ol.ladder li.past{opacity:0.45}
   ol.ladder li.next .lname{color:var(--forest-deep)}
 
@@ -944,7 +993,7 @@
 </div>
 
 <script>
-const DATA = {"race":{"name":"Bigfoot 200","date":"2027-08-13","goal":"sub-100hr","schedule":"97:00"},"blocks":[{"id":1,"name":"Block 1 — base + vertical intro","start":"2026-09-07","end":"2026-12-12","vert":"3,500 ft","hours":"12 hr/wk","endsWith":"Frozen Trail Run Fest 50K — FIRST ULTRA","targets":{"hoursPerWeek":12,"vertFtPerWeek":3500,"milesPerWeek":45,"peakDayHours":6,"volumeDayCapHours":8,"nightHoursCumulative":3}},{"id":2,"name":"Block 2 — build","start":"2026-12-13","end":"2027-02-13","vert":"5,000 ft","hours":"14 hr/wk","endsWith":"BURT 55K, then Hagg Mud 50K","targets":{"hoursPerWeek":14,"vertFtPerWeek":5000,"milesPerWeek":50,"peakDayHours":8,"volumeDayCapHours":8,"nightHoursCumulative":6}},{"id":3,"name":"Block 3 — night running","start":"2027-02-14","end":"2027-04-16","vert":"6,500 ft","hours":"16 hr/wk","endsWith":"Gorge Waterfalls 100K — FIRST 100K","targets":{"hoursPerWeek":16,"vertFtPerWeek":6500,"milesPerWeek":55,"peakDayHours":10,"volumeDayCapHours":8,"nightHoursCumulative":12}},{"id":4,"name":"Block 4 — the gate","start":"2027-04-17","end":"2027-06-18","vert":"8,000 ft","hours":"18 hr/wk","endsWith":"Strawberry Fields Forever 100 — FIRST 100-MILER, the gate","targets":{"hoursPerWeek":18,"vertFtPerWeek":8000,"milesPerWeek":60,"peakDayHours":14,"volumeDayCapHours":8,"nightHoursCumulative":20}},{"id":5,"name":"Block 5 — peak + taper","start":"2027-06-19","end":"2027-08-13","vert":"10,000 ft","hours":"20–22 hr/wk","endsWith":"BIGFOOT 200","targets":{"hoursPerWeek":21,"vertFtPerWeek":10000,"milesPerWeek":65,"peakDayHours":16,"volumeDayCapHours":8,"nightHoursCumulative":30},"taper":true}],"races":[{"name":"Three Sisters Loop","start":"2026-10-02","end":"2026-10-05","tag":"multi-day · first sleep-stop practice"},{"name":"Run the Rock 25K","start":"2026-11-07","end":"2026-11-07","tag":"first trail race · ~4-5 hr"},{"name":"West Linn Turkey Trot","start":"2026-11-26","end":"2026-11-26","tag":"tune-up"},{"name":"St. Jude Memphis Half Marathon","start":"2026-12-05","end":"2026-12-05","tag":"tune-up"},{"name":"Frozen Trail Run Fest 50K","start":"2026-12-12","end":"2026-12-12","tag":"FIRST ULTRA · Block 1 checkpoint"},{"name":"BURT 55K","start":"2027-02-06","end":"2027-02-06","tag":"one 33-mi loop, 4,000 ft · aid-station rehearsal · the 100-mile and 110K options are also open — see plan-revisions.md"},{"name":"Hagg Mud 50K","start":"2027-02-15","end":"2027-02-15","tag":"tune-up · date approximate · only 9 days after BURT, check both"},{"name":"Gorge Waterfalls 100K","start":"2027-04-16","end":"2027-04-16","tag":"FIRST 100K · **WS QUALIFIER** · 17 hr cutoff · this is the one that banks the qualifier"},{"name":"Strawberry Fields Forever 100","start":"2027-06-19","end":"2027-06-19","tag":"FIRST 100-MILER · THE GATE · 10K loop × 16 at North Bonneville, ~3,200 ft, 30 hr limit, can drop to 100K/50K and still finish · DATE ESTIMATED, 2027 not yet published · NOT a WS qualifier — Gorge Waterfalls in April is","link":"https://columbiagorgerunningclub.com/strawberry-fields-forever/","linkLabel":"Columbia Gorge Running Club · Strawberry Fields Forever"},{"name":"Bigfoot 200","start":"2027-08-13","end":"2027-08-13","tag":"A race · 97:00 schedule, sub-100 goal"}],"longDays":[{"date":"2026-09-13","title":"Wildwood — vertical build","vert":"~2,400 ft","desc":"Week 1 of the long-day progression. In-town, smooth tread.","link":"https://www.alltrails.com/parks/us/oregon/forest-park","linkLabel":"AllTrails · Forest Park"},{"date":"2026-09-20","title":"Angels Rest → Devil's Rest loop","vert":"~2,770 ft","desc":"10.7 mi, Columbia River Gorge. Talus and exposed switchbacks. No timed-use permit in 2026. Objective is the descent, not the summit — watch the descent HR gap.","link":"https://www.alltrails.com/trail/us/oregon/angels-rest-loop-trail","linkLabel":"AllTrails · Angels Rest to Devil's Rest Loop"},{"date":"2026-09-27","title":"Dog Mountain","vert":"~3,200 ft","desc":"7.6 mi, steep and relentless, no technical ground. Swapped in from Nov 22 because Table Mountain turned out to be a 14.7 mi / 4,550 ft day, and stacking that against the Three Sisters trip the following weekend was too much. Permit is spring weekends only — free in September.","link":"https://www.alltrails.com/trail/us/washington/dog-mountain-trail","linkLabel":"AllTrails · Dog Mountain Trail"},{"date":"2026-10-03","title":"Three Sisters Loop","vert":"multi-day","desc":"First real overnight and multi-day exposure — a good spot to try a short deliberate sleep stop.","link":"https://www.alltrails.com/trail/us/oregon/three-sisters-loop","linkLabel":"AllTrails · Three Sisters Loop"},{"date":"2026-10-11","title":"DELOAD — Wildwood","vert":"~2,400 ft","desc":"Deload week: 60-70% of block targets. Recovery from the Three Sisters multi-day. Keep the frequency, cut the duration.","link":"https://www.alltrails.com/parks/us/oregon/forest-park","linkLabel":"AllTrails · Forest Park"},{"date":"2026-10-18","title":"COURSE RECON — Norway Pass → Mount Margaret","vert":"~2,820 ft","desc":"11 mi out-and-back, high point 5,780 ft. This is Bigfoot course miles 56 back toward 37, and Mount Margaret is the HIGH POINT OF THE RACE. Manual: 'Best views of the course, recommend running in daylight if possible.' NW Forest Pass or $5 day-use; no backcountry permit for day hiking. Water at Bear Camp (mi 4.1) is unreliable late season — carry it. No dogs. WEATHER PLAN: FR 99 and the Norway Pass trailhead close with snow and mid-October is late. Check mshinstitute.org/current-conditions the week before. If the road is shut, SWAP with Oct 24 — do Elk/Kings today and try the recon again the following weekend.","fallback":"Swap with Oct 24 (Elk / Kings) if FR 99 is closed.","link":"https://www.alltrails.com/trail/us/washington/mount-margaret-via-boundary-trail","linkLabel":"AllTrails · Mount Margaret via Boundary Trail"},{"date":"2026-10-25","title":"Elk Mountain / Kings Mountain traverse","vert":"~3,850 ft","desc":"10.9 mi, Tillamook State Forest. Exposed narrow ridge with scrambling and a fixed rope — closest thing in Block 1 to Blue Lake → Coldwater Lake. Elk Mtn climbs 2,080 ft in 1.5 mi. Coast Range, high point 3,226 ft — no snow risk in October, which is why it's the recon's backstop. IF YOU SWAPPED: this is the second and last recon attempt. If FR 99 is still shut, do Nesmith Point (~3,800 ft, similar day) and let the recon wait for summer 2027 — Klickitat → Twin Sisters matters more anyway and wants 2027 conditions.","fallback":"If used as the second recon attempt and FR 99 is still closed: Nesmith Point, ~3,800 ft.","link":"https://www.alltrails.com/trail/us/oregon/elk-mountain-to-kings-mountain-loop","linkLabel":"AllTrails · Elk Mountain to King's Mountain Loop"},{"date":"2026-11-01","title":"Mount Defiance","vert":"~4,840 ft","desc":"11.6 mi, the hardest day hike in the region — 3,000 ft in three miles. Biggest day of the block. Late in its season at 4,959 ft: if there's snow up high, swap to Nesmith Point (~3,800 ft).","link":"https://www.alltrails.com/trail/us/oregon/mount-defiance-trail-and-starvation-ridge-loop","linkLabel":"AllTrails · Mount Defiance and Starvation Ridge Loop"},{"date":"2026-11-07","title":"Run the Rock 25K","vert":"—","desc":"Block 1 checkpoint. 25K rather than the 50K: running tolerance is 12 mi/wk and even a perfect 10%/week ramp only reaches ~26 by today, against 31 running miles for the 50K. Finish strong rather than survived.","link":"https://ultrasignup.com/register.aspx?did=132453","linkLabel":"UltraSignup · Run the Rock"},{"date":"2026-11-15","title":"DELOAD — Angels Rest","vert":"~2,770 ft","desc":"Deload week: 60-70% of block targets. Recovery from Run the Rock. Easy effort, half the usual long day.","link":"https://www.alltrails.com/trail/us/oregon/angels-rest--3","linkLabel":"AllTrails · Angel's Rest"},{"date":"2026-11-22","title":"Table Mountain","vert":"~4,550 ft","desc":"14.7 mi out-and-back from the Bonneville trailhead in North Bonneville — NOT the 8.4 mi figure this entry used to carry. That was the Aldrich Butte approach, which AllTrails now marks PRIVATE PROPERTY; Bonneville is the only legal access. Heartbreak Ridge drops 700 ft in half a mile on loose talus — the quad-wrecker rehearsal. Late November at a 3,417 ft summit: if Heartbreak is iced, go up and back on the PCT route and skip the ridge. Poles, 2–3 L of water.","fallback":"If Heartbreak Ridge is iced or snowed: PCT route out-and-back, skip the ridge.","link":"https://www.alltrails.com/trail/us/washington/table-mountain-trail-via-pacific-crest-trail","linkLabel":"AllTrails · Table Mountain via the PCT"},{"date":"2026-11-29","title":"Elk / Kings — BENCHMARK REPEAT","vert":"~3,850 ft","desc":"Same course as Oct 24, six weeks later. This is a measurement, not a workout: compare time, descent HR gap, and how the last hour felt. It tells you whether Block 1 worked.","link":"https://www.alltrails.com/trail/us/oregon/elk-mountain-to-kings-mountain-loop","linkLabel":"AllTrails · Elk Mountain to King's Mountain Loop"},{"date":"2026-12-06","title":"DELOAD — taper into Frozen Trail","vert":"~1,800 ft","desc":"Deload week: 60-70%. Taper into the Dec 12 Frozen Trail 50K that closes Block 1. Short and controlled.","link":"https://www.alltrails.com/parks/us/oregon/forest-park","linkLabel":"AllTrails · Forest Park"},{"date":"2026-12-12","title":"Frozen Trail Run Fest 50K","vert":"race","desc":"Block 1 checkpoint. Block question: can you sustain a full day on feet and descend hard without wrecking your quads?","link":"https://level32racing.com/frozen-trail-run-fest","linkLabel":"Level 32 Racing · Frozen Trail Run Fest"}]};
+const DATA = {"race":{"name":"Bigfoot 200","date":"2027-08-13","goal":"sub-100hr","schedule":"97:00"},"blocks":[{"id":1,"name":"Block 1 — base + vertical intro","start":"2026-09-07","end":"2026-12-12","vert":"3,500 ft","hours":"12 hr/wk","endsWith":"Frozen Trail Run Fest 50K — FIRST ULTRA","targets":{"hoursPerWeek":12,"vertFtPerWeek":3500,"milesPerWeek":45,"peakDayHours":6,"volumeDayCapHours":8,"nightHoursCumulative":3}},{"id":2,"name":"Block 2 — build","start":"2026-12-13","end":"2027-02-13","vert":"5,000 ft","hours":"14 hr/wk","endsWith":"BURT 55K, then Hagg Mud 50K","targets":{"hoursPerWeek":14,"vertFtPerWeek":5000,"milesPerWeek":50,"peakDayHours":8,"volumeDayCapHours":8,"nightHoursCumulative":6}},{"id":3,"name":"Block 3 — night running","start":"2027-02-14","end":"2027-04-16","vert":"6,500 ft","hours":"16 hr/wk","endsWith":"Gorge Waterfalls 100K — FIRST 100K","targets":{"hoursPerWeek":16,"vertFtPerWeek":6500,"milesPerWeek":55,"peakDayHours":10,"volumeDayCapHours":8,"nightHoursCumulative":12}},{"id":4,"name":"Block 4 — the gate","start":"2027-04-17","end":"2027-06-18","vert":"8,000 ft","hours":"18 hr/wk","endsWith":"Strawberry Fields Forever 100 — FIRST 100-MILER, the gate","targets":{"hoursPerWeek":18,"vertFtPerWeek":8000,"milesPerWeek":60,"peakDayHours":14,"volumeDayCapHours":8,"nightHoursCumulative":20}},{"id":5,"name":"Block 5 — peak + taper","start":"2027-06-19","end":"2027-08-13","vert":"10,000 ft","hours":"20–22 hr/wk","endsWith":"BIGFOOT 200","targets":{"hoursPerWeek":21,"vertFtPerWeek":10000,"milesPerWeek":65,"peakDayHours":16,"volumeDayCapHours":8,"nightHoursCumulative":30},"taper":true}],"races":[{"name":"Three Sisters Loop","start":"2026-10-02","end":"2026-10-05","tag":"multi-day · first sleep-stop practice","signup":"https://www.recreation.gov/permits/4675311","signupLabel":"Recreation.gov · Central Cascades overnight permit","signupStatus":"open","signupNote":"Permit, not a race. Quota season; book the moment your date is bookable.","taperDays":1,"recoveryDays":2},{"name":"Run the Rock 25K","start":"2026-11-07","end":"2026-11-07","tag":"first trail race · ~4-5 hr","signup":"https://ultrasignup.com/register.aspx?did=132453","signupLabel":"UltraSignup · Run the Rock","signupStatus":"open","taperDays":2,"recoveryDays":2},{"name":"West Linn Turkey Trot","start":"2026-11-26","end":"2026-11-26","tag":"tune-up","signup":"https://runsignup.com/Race/OR/WestLinn/WestLinnTurkeyTrot","signupLabel":"RunSignup · West Linn Turkey Trot","signupStatus":"open","taperDays":1,"recoveryDays":1},{"name":"St. Jude Memphis Half Marathon","start":"2026-12-05","end":"2026-12-05","tag":"tune-up","signup":"https://www.stjude.org/get-involved/fitness-fundraisers/memphis-marathon/register.html","signupLabel":"stjude.org · Memphis Marathon Weekend","signupStatus":"open","taperDays":2,"recoveryDays":2},{"name":"Frozen Trail Run Fest 50K","start":"2026-12-12","end":"2026-12-12","tag":"FIRST ULTRA · Block 1 checkpoint","signup":"https://runsignup.com/Race/OR/Eugene/FrozenTrailRunFest","signupLabel":"RunSignup · Frozen Trail Run Fest","signupStatus":"open","signupNote":"First ultra. Register early — this one anchors Block 1.","taperDays":3,"recoveryDays":4},{"name":"BURT 55K","start":"2027-02-06","end":"2027-02-06","tag":"one 33-mi loop, 4,000 ft · aid-station rehearsal · the 100-mile and 110K options are also open — see plan-revisions.md","signup":"https://ultrasignup.com/register.aspx?did=130776","signupLabel":"UltraSignup · BURT 100 (2026 listing)","signupStatus":"not-yet-open","signupNote":"2027 listing not posted as of Sep 2026. This is the Feb 2026 page — watch it for the 2027 rollover.","taperDays":3,"recoveryDays":5},{"name":"Hagg Mud 50K","start":"2027-02-15","end":"2027-02-15","tag":"tune-up · date approximate · only 9 days after BURT, check both","signup":"https://ultrasignup.com/register.aspx?did=125080","signupLabel":"UltraSignup · Hagg Mud (2026 listing)","signupStatus":"not-yet-open","signupNote":"2027 listing not posted as of Sep 2026. Date here is an estimate.","taperDays":3,"recoveryDays":4},{"name":"Gorge Waterfalls 100K","start":"2027-04-16","end":"2027-04-16","tag":"FIRST 100K · WS QUALIFIER · 17 hr cutoff · this is the one that banks the qualifier","signup":"https://ultrasignup.com/register.aspx?did=138921","signupLabel":"UltraSignup · Gorge Waterfalls 2027","signupStatus":"opens-later","signupNote":"REGISTRATION OPENS MON OCT 5, 2026 @ 6:00 AM PT. Sells out fast. This is the WS qualifier — set an alarm.","taperDays":5,"recoveryDays":10},{"name":"Strawberry Fields Forever 100","start":"2027-06-19","end":"2027-06-19","tag":"FIRST 100-MILER · THE GATE · daytime start · 10K loop × 16 at North Bonneville (~45 min away), ~3,200 ft, 30 hr limit · can drop to 100K/50K and still finish, which is why this is the gate and not SISU · DATE ESTIMATED, 2027 not yet published · NOT a WS qualifier — Gorge Waterfalls in April is","link":"https://columbiagorgerunningclub.com/strawberry-fields-forever/","linkLabel":"Columbia Gorge Running Club · Strawberry Fields Forever","signup":"https://ultrasignup.com/register.aspx?did=132001","signupLabel":"UltraSignup · Strawberry Fields (2026 listing)","signupStatus":"not-yet-open","signupNote":"2027 listing not posted as of Sep 2026. Date here is an estimate.","badge":"THE GATE","taperDays":5,"recoveryDays":14},{"name":"SISU 100","start":"2027-06-25","end":"2027-06-27","tag":"SECOND 100-MILE ATTEMPT · 6 days after Strawberry Fields · Camp Sheppard, Enumclaw WA · 9:00 PM Friday night start — the only race on the ladder that makes you run through the first night from the gun, which is the exact Bigfoot skill · six marked mountain trails (3–19 mi), run each once (~57.5 mi) then repeat to 100, never the same trail 3× in a row · DECISION RULE: start this ONLY if Strawberry Fields did not happen, was cancelled, or you stopped before ~50 mi and recovered clean. If you finished 100 at Strawberry Fields, DO NOT START — take the finish and recover into Block 5.","link":"https://ultrasignup.com/register.aspx?did=141307","linkLabel":"UltraSignup · SISU 100 PNW","signup":"https://ultrasignup.com/register.aspx?did=141307","signupLabel":"UltraSignup · SISU 100 2027","signupStatus":"open","signupNote":"OPEN NOW — $160 through Sep 30, 2026, then $210. Closes Jun 4, 2027. Entering both is the point: cheap insurance, and you decide on Jun 20.","badge":"SECOND CHANCE","taperDays":3,"recoveryDays":14},{"name":"Bigfoot 200","start":"2027-08-13","end":"2027-08-13","tag":"A race · 97:00 schedule, sub-100 goal","signup":"https://ultrasignup.com/register.aspx?did=142345","signupLabel":"UltraSignup · Bigfoot 200 2027","signupStatus":"closed","signupNote":"2027 lottery ran Aug 28, 2026 and the race is SOLD OUT. Waitlist is free to join. Confirm your entry status.","taperDays":7,"recoveryDays":0}],"longDays":[{"date":"2026-09-13","title":"Wildwood — vertical build","vert":"~2,400 ft","desc":"Week 1 of the long-day progression. In-town, smooth tread.","link":"https://www.alltrails.com/parks/us/oregon/forest-park","linkLabel":"AllTrails · Forest Park"},{"date":"2026-09-20","title":"Angels Rest → Devil's Rest loop","vert":"~2,770 ft","desc":"10.7 mi, Columbia River Gorge. Talus and exposed switchbacks. No timed-use permit in 2026. Objective is the descent, not the summit — watch the descent HR gap.","link":"https://www.alltrails.com/trail/us/oregon/angels-rest-loop-trail","linkLabel":"AllTrails · Angels Rest to Devil's Rest Loop"},{"date":"2026-09-27","title":"Dog Mountain","vert":"~3,200 ft","desc":"7.6 mi, steep and relentless, no technical ground. Swapped in from Nov 22 because Table Mountain turned out to be a 14.7 mi / 4,550 ft day, and stacking that against the Three Sisters trip the following weekend was too much. Permit is spring weekends only — free in September.","link":"https://www.alltrails.com/trail/us/washington/dog-mountain-trail","linkLabel":"AllTrails · Dog Mountain Trail"},{"date":"2026-10-03","title":"Three Sisters Loop","vert":"multi-day","desc":"First real overnight and multi-day exposure — a good spot to try a short deliberate sleep stop.","link":"https://www.alltrails.com/trail/us/oregon/three-sisters-loop","linkLabel":"AllTrails · Three Sisters Loop"},{"date":"2026-10-11","title":"DELOAD — Wildwood","vert":"~2,400 ft","desc":"Deload week: 60-70% of block targets. Recovery from the Three Sisters multi-day. Keep the frequency, cut the duration.","link":"https://www.alltrails.com/parks/us/oregon/forest-park","linkLabel":"AllTrails · Forest Park"},{"date":"2026-10-18","title":"COURSE RECON — Norway Pass → Mount Margaret","vert":"~2,820 ft","desc":"11 mi out-and-back, high point 5,780 ft. This is Bigfoot course miles 56 back toward 37, and Mount Margaret is the HIGH POINT OF THE RACE. Manual: 'Best views of the course, recommend running in daylight if possible.' NW Forest Pass or $5 day-use; no backcountry permit for day hiking. Water at Bear Camp (mi 4.1) is unreliable late season — carry it. No dogs. WEATHER PLAN: FR 99 and the Norway Pass trailhead close with snow and mid-October is late. Check mshinstitute.org/current-conditions the week before. If the road is shut, SWAP with Oct 24 — do Elk/Kings today and try the recon again the following weekend.","fallback":"Swap with Oct 24 (Elk / Kings) if FR 99 is closed.","link":"https://www.alltrails.com/trail/us/washington/mount-margaret-via-boundary-trail","linkLabel":"AllTrails · Mount Margaret via Boundary Trail"},{"date":"2026-10-25","title":"Elk Mountain / Kings Mountain traverse","vert":"~3,850 ft","desc":"10.9 mi, Tillamook State Forest. Exposed narrow ridge with scrambling and a fixed rope — closest thing in Block 1 to Blue Lake → Coldwater Lake. Elk Mtn climbs 2,080 ft in 1.5 mi. Coast Range, high point 3,226 ft — no snow risk in October, which is why it's the recon's backstop. IF YOU SWAPPED: this is the second and last recon attempt. If FR 99 is still shut, do Nesmith Point (~3,800 ft, similar day) and let the recon wait for summer 2027 — Klickitat → Twin Sisters matters more anyway and wants 2027 conditions.","fallback":"If used as the second recon attempt and FR 99 is still closed: Nesmith Point, ~3,800 ft.","link":"https://www.alltrails.com/trail/us/oregon/elk-mountain-to-kings-mountain-loop","linkLabel":"AllTrails · Elk Mountain to King's Mountain Loop"},{"date":"2026-11-01","title":"Mount Defiance","vert":"~4,840 ft","desc":"11.6 mi, the hardest day hike in the region — 3,000 ft in three miles. Biggest day of the block. Late in its season at 4,959 ft: if there's snow up high, swap to Nesmith Point (~3,800 ft).","link":"https://www.alltrails.com/trail/us/oregon/mount-defiance-trail-and-starvation-ridge-loop","linkLabel":"AllTrails · Mount Defiance and Starvation Ridge Loop"},{"date":"2026-11-07","title":"Run the Rock 25K","vert":"—","desc":"Block 1 checkpoint. 25K rather than the 50K: running tolerance is 12 mi/wk and even a perfect 10%/week ramp only reaches ~26 by today, against 31 running miles for the 50K. Finish strong rather than survived.","link":"https://ultrasignup.com/register.aspx?did=132453","linkLabel":"UltraSignup · Run the Rock"},{"date":"2026-11-15","title":"DELOAD — Angels Rest","vert":"~2,770 ft","desc":"Deload week: 60-70% of block targets. Recovery from Run the Rock. Easy effort, half the usual long day.","link":"https://www.alltrails.com/trail/us/oregon/angels-rest--3","linkLabel":"AllTrails · Angel's Rest"},{"date":"2026-11-22","title":"Table Mountain","vert":"~4,550 ft","desc":"14.7 mi out-and-back from the Bonneville trailhead in North Bonneville — NOT the 8.4 mi figure this entry used to carry. That was the Aldrich Butte approach, which AllTrails now marks PRIVATE PROPERTY; Bonneville is the only legal access. Heartbreak Ridge drops 700 ft in half a mile on loose talus — the quad-wrecker rehearsal. Late November at a 3,417 ft summit: if Heartbreak is iced, go up and back on the PCT route and skip the ridge. Poles, 2–3 L of water.","fallback":"If Heartbreak Ridge is iced or snowed: PCT route out-and-back, skip the ridge.","link":"https://www.alltrails.com/trail/us/washington/table-mountain-trail-via-pacific-crest-trail","linkLabel":"AllTrails · Table Mountain via the PCT"},{"date":"2026-11-29","title":"Elk / Kings — BENCHMARK REPEAT","vert":"~3,850 ft","desc":"Same course as Oct 24, six weeks later. This is a measurement, not a workout: compare time, descent HR gap, and how the last hour felt. It tells you whether Block 1 worked.","link":"https://www.alltrails.com/trail/us/oregon/elk-mountain-to-kings-mountain-loop","linkLabel":"AllTrails · Elk Mountain to King's Mountain Loop"},{"date":"2026-12-06","title":"DELOAD — taper into Frozen Trail","vert":"~1,800 ft","desc":"Deload week: 60-70%. Taper into the Dec 12 Frozen Trail 50K that closes Block 1. Short and controlled.","link":"https://www.alltrails.com/parks/us/oregon/forest-park","linkLabel":"AllTrails · Forest Park"},{"date":"2026-12-12","title":"Frozen Trail Run Fest 50K","vert":"race","desc":"Block 1 checkpoint. Block question: can you sustain a full day on feet and descend hard without wrecking your quads?","link":"https://level32racing.com/frozen-trail-run-fest","linkLabel":"Level 32 Racing · Frozen Trail Run Fest"}]};
 const BLOCKS = DATA.blocks;
 
 const RACES = DATA.races;
@@ -988,9 +1037,104 @@ function weekOfBlockOn(block, d){
 }
 
 // The race covering this date, if any. Multi-day races cover every day in range.
+// A race flagged `backup:true` would be excluded here so it could not blank out
+// a training week for a start that may never happen. Nothing carries that flag
+// right now - SISU 100 is entered as a real second attempt - but the guard
+// stays so adding one later does not silently erase a week.
 function raceOn(d){
   return (typeof RACES === 'undefined' ? [] : RACES)
-    .find(r => d >= toDate(r.start) && d <= toDate(r.end)) || null;
+    .find(r => !r.backup && d >= toDate(r.start) && d <= toDate(r.end)) || null;
+}
+
+// Race shoulders. A race is not just its own day: the days before it have to
+// be a taper and the days after it have to be recovery, and until this existed
+// the calendar cheerfully printed 90-minute downhill quad sessions into the
+// six-day gap between Strawberry Fields and SISU. Each race carries its own
+// taperDays/recoveryDays in schedule.json - no distance guessing here.
+// Recovery outranks taper: you cannot taper into a race you have not recovered
+// from, and when the two overlap the honest answer is "you are still recovering".
+function shoulderOn(d){
+  const list = (typeof RACES === 'undefined' ? [] : RACES);
+  // Recovery windows overlap: SISU ends six days after Strawberry Fields, so a
+  // day in early July sits inside both. The MOST RECENT race is the one the legs
+  // are actually recovering from, so take the smallest n, not the first match.
+  let taper = null, recov = null;
+  for(const r of list){
+    if(r.backup) continue;
+    const rec = r.recoveryDays || 0, tap = r.taperDays || 0;
+    if(rec){
+      const n = daysBetween(toDate(r.end), d);
+      if(n >= 1 && n <= rec && (!recov || n < recov.n))
+        recov = { kind: 'recovery', race: r, n: n, of: rec };
+    }
+    if(tap){
+      const n = daysBetween(d, toDate(r.start));
+      if(n >= 1 && n <= tap && (!taper || n < taper.n))
+        taper = { kind: 'taper', race: r, n: n, of: tap };
+    }
+  }
+  return recov || taper;
+}
+
+function shoulderSession(sh, date){
+  const dow = date.getDay();
+  if(sh.kind === 'recovery'){
+    const easy = sh.n <= 2
+      ? 'Nothing, or a flat walk under 30 min. No running.'
+      : (sh.n <= 5
+        ? 'Walk, or 20-30 min shuffle on flat ground if it feels genuinely good. Stop early.'
+        : 'Easy Z2 only, flat, under an hour. No vertical, no intervals, no downhill.');
+    return sess('Recovery - day ' + sh.n + ' after ' + sh.race.name, [
+      { k: 'DO', v: easy },
+      { k: 'DO NOT', v: 'No uphill intervals, no eccentric strength, no sustained downhill. '
+        + 'The damage from ' + sh.race.name + ' is still being repaired and loading it now '
+        + 'is how a finish turns into an injury.' },
+      { k: 'WHY', v: 'Day ' + sh.n + ' of a ' + sh.of + '-day recovery window written into the plan '
+        + 'for this race, not a rule of thumb.' }
+    ]);
+  }
+  const body = (dow === 1)
+    ? 'Full rest.'
+    : (sh.n <= 2 ? 'Nothing, or 20-30 min very easy with 4 x 20 s strides to stay sharp.'
+                 : 'Easy Z2, 30-45 min, flat. Legs stay fresh.');
+  return sess('Taper - ' + sh.n + ' day' + (sh.n === 1 ? '' : 's') + ' to ' + sh.race.name, [
+    { k: 'DO', v: body },
+    { k: 'DO NOT', v: 'No vertical, no intervals, no downhill, no strength. '
+      + 'Nothing you do this week makes you fitter for ' + sh.race.name + '; '
+      + 'it can only make you more tired.' },
+    { k: 'WHY', v: 'Day ' + sh.n + ' of a ' + sh.of + '-day taper set for this race.' }
+  ]);
+}
+
+// The A race is the last NON-backup race on the ladder.
+function aRaceOf(list){
+  const real = (list || []).filter(r => !r.backup);
+  return real.length ? real[real.length - 1] : null;
+}
+
+// Signup links. Status drives the badge; a note explains anything non-obvious
+// (a date that has not been published, a registration window that has not
+// opened, a race that has already sold out).
+var SIGNUP_BADGE = {
+  'open':         { t: 'Register',       c: 'sg-open'  },
+  'opens-later':  { t: 'Opens later',    c: 'sg-soon'  },
+  'not-yet-open': { t: '2027 TBA',       c: 'sg-tba'   },
+  'closed':       { t: 'Sold out',       c: 'sg-shut'  }
+};
+function signupHtml(r){
+  if(!r || !r.signup) return '';
+  const b = SIGNUP_BADGE[r.signupStatus] || SIGNUP_BADGE['open'];
+  const lbl = String(r.signupLabel || 'Registration')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  let h = '<a class="signup ' + b.c + '" href="' + r.signup +
+          '" target="_blank" rel="noopener noreferrer" title="' + lbl + '">' +
+          b.t + '</a>';
+  if(r.signupNote){
+    h += '<div class="sg-note">' +
+         String(r.signupNote).replace(/&/g,'&amp;').replace(/</g,'&lt;') +
+         '</div>';
+  }
+  return h;
 }
 
 function ordinalOfMonth(d){
@@ -1189,25 +1333,65 @@ function buildWeekOf(block, d){
 const TOLERANCE_NOTE = 'If the week’s running miles are at or over Garmin’s running ' +
   'tolerance, drop Friday to a walk before cutting anything else.';
 
-// Indoor versions of the two terrain sessions. Portland in January, a dark
-// weeknight, or no time to reach a trail should cost the session's shape, not
-// the session. The treadmill numbers line up with the outdoor ones rather than
-// being a vague "do something on a machine".
-function treadmillUp(minutes, work){
-  return ' TREADMILL VERSION: 10 min flat warm-up, then ' + work + ' at 12\u201315% grade '
-       + 'holding Z3 (137\u2013157 bpm) \u2014 walk it fast rather than jogging badly, the grade '
-       + 'is what matters \u2014 with 2\u20133 min flat easy between. Strides become 5 \u00d7 20 sec '
-       + 'at 8\u201310% grade, stepping off the belt to recover. 10 min cool-down, '
-       + minutes + ' min total.';
+// ---------------------------------------------------------------------------
+// Sessions are structured, not prose. Each one can carry PARTS - a run
+// portion, a workout portion with its own movement list, an indoor
+// alternative - so the page can lay them out instead of printing a paragraph
+// and hoping. desc stays as a flattened string for anything that still wants
+// one.
+
+// Demo videos, checked 2026-09-15. If one rots, replace the URL here and every
+// page picks it up.
+const DEMO = {
+  stepDown:  'https://www.youtube.com/watch?v=Or4C-UQ63Xc',
+  stepUp:    'https://www.youtube.com/watch?v=tqECKZxlCKE',
+  slRdl:     'https://www.youtube.com/watch?v=Zfr6wizR8rs',
+  carry:     'https://www.youtube.com/watch?v=lLAw6fUccKA',
+  downhill:  'https://www.youtube.com/watch?v=md0vWMb8QrM',
+  hillReps:  'https://www.youtube.com/watch?v=JZJk7lld69E',
+  hillSprint:'https://www.youtube.com/watch?v=fZ85Ht6y8Vc'
+};
+
+function escHtml(t){
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                  .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-const TREADMILL_DOWN =
-  ' TREADMILL VERSION: only if yours declines. Set \u22124 to \u22126% and run the continuous '
-  + 'block at easy effort, cadence 175\u2013180, short quick steps, no heel braking \u2014 the '
-  + 'point is the eccentric load, not the pace. If it does NOT decline, a treadmill cannot do '
-  + 'this session at all: use the LeBron ramp instead (walk up easy, run down under control, '
-  + 'repeat until the descent minutes add up), or a parking garage ramp, or stadium steps. '
-  + 'Note which you did \u2014 ramp repeats are not the same stimulus as one unbroken descent, '
-  + 'and the descent HR gap will show the difference.';
+
+// Flatten parts to a single sentence-ish string, for the places that still
+// take plain text.
+function partsToText(parts){
+  return (parts || []).map(p => {
+    const items = (p.items || []).map(it =>
+      it.n + (it.s ? ' ' + it.s : '')).join('; ');
+    return p.k + ': ' + [p.v, items].filter(Boolean).join(' ');
+  }).join('  ');
+}
+
+// One session, laid out. Used by the Today page and the Review tab, so they
+// cannot drift.
+function partsHtml(w){
+  if(!w || !w.parts || !w.parts.length) return '';
+  return '<div class="sparts">' + w.parts.map(p => {
+    const items = (p.items || []).map(it =>
+      '<li><span class="mv-n">' + escHtml(it.n) + '</span>'
+      + (it.s ? '<span class="mv-s">' + escHtml(it.s) + '</span>' : '')
+      + (it.u ? ' <a class="mv-d" href="' + escHtml(it.u) + '" target="_blank" '
+              + 'rel="noopener noreferrer">demo</a>' : '')
+      + '</li>').join('');
+    return '<div class="spart spart-' + p.k.toLowerCase().replace(/[^a-z]/g,'') + '">'
+         + '<div class="spart-k">' + escHtml(p.k) + '</div>'
+         + '<div class="spart-v">' + (p.v ? escHtml(p.v) : '')
+         + (items ? '<ul class="mvs">' + items + '</ul>' : '')
+         + '</div></div>';
+  }).join('') + '</div>';
+}
+
+// Build a session from parts, keeping desc in sync automatically.
+function sess(title, parts){
+  return { title: title, parts: parts, desc: partsToText(parts) };
+}
+
+
 
 // TUESDAY — uphill tempo on a four-week cycle: 3x5, 3x10, 2x15, easy. Holz's
 // structure. Replaces the fixed LeBron prescription, which never got harder.
@@ -1225,74 +1409,102 @@ const STRIDES_MIN = 6;   // 5 x 20 sec plus the walk back
 function tuesdayWorkout(block, d){
   const m = runMin(block);
   const slot = Math.max(0, buildWeekOf(block, d) - 1) % 3;
-  // Warm-up and cool-down come out of the block's easy-running budget; the
-  // session is then however long the work on top of it actually takes.
   const ends = Math.max(16, Math.round(m.tue * 0.45));
   const half = Math.round(ends / 2);
 
   if(isDeloadWeek(block, d)){
-    const total = ends + 13;
-    return { title: 'Uphill tempo \u2014 easy week',
-      desc: '2 \u00d7 5 min at tempo, 3 min easy between, no strides. ' + half
-          + ' min easy either side, about ' + total + ' min total. Deload week: keep the '
-          + 'frequency, cut the intensity. The ladder pauses here rather than advancing '
-          + '\u2014 next week picks up where it left off.'
-          + treadmillUp(total, '2 \u00d7 5 min') + ' ' + TOLERANCE_NOTE };
+    return sess('Uphill tempo \u2014 easy week', [
+      { k: 'Run', v: half + ' min easy either side, about ' + (ends + 13) + ' min total.' },
+      { k: 'Workout', v: '2 \u00d7 5 min at tempo, 3 min easy between. No strides. Deload '
+          + 'week: keep the frequency, cut the intensity \u2014 the ladder pauses here rather '
+          + 'than advancing, and next week picks up where it left off.' },
+      { k: 'Indoors', v: 'Treadmill: 10 min flat warm-up, 2 \u00d7 5 min at 12\u201315% grade '
+          + 'holding Z3, 10 min cool-down.' },
+      { k: 'If over tolerance', v: TOLERANCE_NOTE }
+    ]);
   }
 
   const rung = UPHILL_LADDER[slot];
   const total = ends + rung.work + rung.rec + STRIDES_MIN;
-  return { title: 'Uphill tempo intervals + power strides',
-    desc: rung.label + ' uphill at Z3 (137\u2013157 bpm), 3 min easy between, then 5 \u00d7 20 '
-        + 'sec power strides at about 85% effort on a moderate grade. ' + half + ' min easy '
-        + 'either side, about ' + total + ' min total'
-        + (slot > 0 ? ' \u2014 the session grows with the ladder, so this is a longer day than '
-                    + 'week 1' : '')
-        + '. Week ' + (slot + 1) + ' of 3: it is meant to progress, so do not leave it at '
-        + '3 \u00d7 5.'
-        + treadmillUp(total, rung.label) + ' ' + TOLERANCE_NOTE };
+  return sess('Uphill tempo intervals + power strides', [
+    { k: 'Run', v: half + ' min easy either side, about ' + total + ' min total.'
+        + (slot > 0 ? ' The session grows with the ladder \u2014 longer than week 1.' : '') },
+    { k: 'Workout', v: 'Week ' + (slot + 1) + ' of 3 on the ladder. It is meant to progress, '
+        + 'so do not leave it at 3 \u00d7 5.',
+      items: [
+        { n: rung.label + ' uphill', s: 'Z3, 137\u2013157 bpm \u00b7 3 min easy between',
+          u: DEMO.hillReps },
+        { n: 'Power hill strides', s: '5 \u00d7 20 sec at ~85% on a moderate grade',
+          u: DEMO.hillSprint }
+      ] },
+    { k: 'Indoors', v: 'Treadmill: 10 min flat warm-up, then ' + rung.label + ' at 12\u201315% '
+        + 'grade holding Z3 \u2014 walk it fast rather than jogging badly, the grade is what '
+        + 'matters \u2014 with 2\u20133 min flat easy between. Strides become 5 \u00d7 20 sec at '
+        + '8\u201310% grade, stepping off the belt to recover. 10 min cool-down.' },
+    { k: 'If over tolerance', v: TOLERANCE_NOTE }
+  ]);
 }
+
 
 // WEDNESDAY — easy aerobic plus the eccentric strength that used to sit on
 // Monday. Step-downs and single-leg RDLs are the quad armour; the loaded
 // carries are the unsupported-specific part.
 function wednesdayWorkout(block){
   const m = runMin(block);
-  return { title: 'Easy run + eccentric strength',
-    desc: m.wed + ' min easy Z2 (118–137 bpm), on trail if you can get to it, then 30 min of '
-        + 'strength: single-leg box step-downs 3 × 10, weighted step-ups with the pack '
-        + '3 × 12, single-leg RDLs 3 × 10, loaded carries. The step-downs are the session '
-        + '— lower slowly; that slow lowering is the load the descent asks for. '
-        + TOLERANCE_NOTE };
+  return sess('Easy run + eccentric strength', [
+    { k: 'Run', v: m.wed + ' min easy Z2 (118\u2013137 bpm), on trail if you can get to it.' },
+    { k: 'Workout', v: '30 min. The step-downs are the session \u2014 lower slowly; that slow '
+        + 'lowering is the load the descent asks for.',
+      items: [
+        { n: 'Single-leg box step-downs', s: '3 \u00d7 10', u: DEMO.stepDown },
+        { n: 'Weighted step-ups, with the pack', s: '3 \u00d7 12', u: DEMO.stepUp },
+        { n: 'Single-leg RDLs', s: '3 \u00d7 10', u: DEMO.slRdl },
+        { n: 'Loaded carries', s: '3 \u00d7 40 m', u: DEMO.carry }
+      ] },
+    { k: 'If over tolerance', v: TOLERANCE_NOTE }
+  ]);
 }
+
 
 // THURSDAY — the session the plan was missing. Bigfoot loses 45,563 ft, more
 // than it climbs, and nothing in the old week descended on purpose.
 function thursdayWorkout(block, d){
   const m = runMin(block);
   const deload = isDeloadWeek(block, d);
-  // 15 / 20 / 25 across the build ladder, back to 10 on a deload.
   const cont = deload ? 10 : 15 + 5 * (Math.max(0, buildWeekOf(block, d) - 1) % 3);
   const mins = deload ? Math.round(m.thu * 0.7) : m.thu;
-  return { title: 'Sustained downhill — quad armour',
-    desc: mins + ' min built around ' + cont + ' min of CONTINUOUS descent. Light feet, high '
-        + 'cadence, no braking — let the legs absorb it rather than the joints. On rock '
-        + 'rather than loam, and late in the day on legs that are already tired. This is the '
-        + 'most race-specific session of the week: the course descends more than it climbs, '
-        + 'and Block 1’s question is whether you can descend hard without wrecking your '
-        + 'quads. Watch the descent HR gap — target is 15 bpm below climb HR; it was 8 on '
-        + 'Sep 13.' + TREADMILL_DOWN + ' ' + TOLERANCE_NOTE };
+  return sess('Sustained downhill \u2014 quad armour', [
+    { k: 'Run', v: mins + ' min, on rock rather than loam, and late in the day on legs that '
+        + 'are already tired.' },
+    { k: 'Workout', v: 'The most race-specific session of the week: the course descends more '
+        + 'than it climbs, and Block 1\u2019s question is whether you can descend hard without '
+        + 'wrecking your quads.',
+      items: [
+        { n: cont + ' min of CONTINUOUS descent', s: 'light feet, high cadence, no braking',
+          u: DEMO.downhill }
+      ] },
+    { k: 'Watch', v: 'Descent HR gap \u2014 target is 15 bpm below climb HR. It was 8 on Sep 13.' },
+    { k: 'Indoors', v: 'Treadmill only if yours declines: \u22124 to \u22126% at easy effort, '
+        + 'cadence 175\u2013180. If it does not decline a treadmill cannot do this session at '
+        + 'all \u2014 use the LeBron ramp, a parking garage ramp, or stadium steps, and note '
+        + 'which, because repeats are not the same stimulus as one unbroken descent.' },
+    { k: 'If over tolerance', v: TOLERANCE_NOTE }
+  ]);
 }
+
 
 // FRIDAY — short, easy, and the first thing to become a walk when the running
 // ramp is running hot.
 function fridayWorkout(block){
   const m = runMin(block);
-  return { title: 'Recovery jog',
-    desc: m.fri + ' min at Z1 (98–118 bpm), easy enough to hold a conversation the whole way. '
-        + 'This is the release valve: if running miles are at or over tolerance this week, '
-        + 'walk it instead. Saturday is recovery and Sunday is the long day.' };
+  return sess('Recovery jog', [
+    { k: 'Run', v: m.fri + ' min at Z1 (98\u2013118 bpm), easy enough to hold a conversation '
+        + 'the whole way.' },
+    { k: 'If over tolerance', v: 'This is the release valve. If running miles are at or over '
+        + 'tolerance this week, walk it instead. Saturday is recovery and Sunday is the long day.' }
+  ]);
 }
+
 
 function scheduleFor(date){
   // A race outranks the weekly template. Most races here fall on a Saturday and
@@ -1314,10 +1526,15 @@ function scheduleFor(date){
 
   // Nothing is planned past the A race. Without this the final week printed a
   // recovery Saturday and a long-day Sunday after Bigfoot had already finished.
-  const aRace = (typeof RACES === 'undefined' || !RACES.length)
-    ? null : RACES[RACES.length - 1];
+  const aRace = (typeof RACES === 'undefined') ? null : aRaceOf(RACES);
   if(aRace && date > toDate(aRace.end))
     return { title: '—', desc: 'After ' + aRace.name + '. Nothing scheduled.' };
+
+  // A dated long day still wins inside a shoulder - those are deliberate, and a
+  // race weekend trip is dated. Otherwise the taper/recovery window outranks the
+  // weekly template, which knows nothing about what race is six days away.
+  const sh = shoulderOn(date);
+  if(sh && !plannedFor(date)) return shoulderSession(sh, date);
 
   // Use the block that CONTAINS this date. Looking two weeks ahead can cross a
   // block boundary, and currentBlock() would hand back today's block instead.
@@ -1361,7 +1578,8 @@ function weekRowsHtml(monday){
     rows += `<tr${isToday ? ' class="is-today"' : ''}>` +
             `<td class="day-name">${label}</td>` +
             `<td><strong>${w.title}</strong><br>` +
-            `<span style="color:var(--ink-faint)">${w.desc}</span>` +
+            (w.parts ? partsHtml(w)
+                     : `<span style="color:var(--ink-faint)">${w.desc}</span>`) +
             routeLink(w) + `</td></tr>`;
   }
   return rows;
@@ -1395,15 +1613,18 @@ function render(){
     ? { title: todaysRace.name, desc: 'Race day. ' + todaysRace.tag + '.' }
     : scheduleFor(today);
   document.getElementById('today-title').textContent = todayWork.title;
-  document.getElementById('today-desc').textContent = todayWork.desc;
+  // The hero card gets the laid-out version too, not the flattened string.
+  const tdesc = document.getElementById('today-desc');
+  if(todayWork.parts){ tdesc.innerHTML = partsHtml(todayWork); tdesc.classList.add('has-parts'); }
+  else { tdesc.textContent = todayWork.desc; }
   document.getElementById('today-route').innerHTML = routeLink(todayWork);
 
-  const raceDays = daysBetween(today, toDate(RACES[RACES.length-1].start));
+  const raceDays = daysBetween(today, toDate(aRaceOf(RACES).start));
   document.getElementById('today-meta').innerHTML =
     `<div><strong>${raceDays}</strong> days to Bigfoot 200</div>` +
     `<div>Week ${weekOfBlock(block)} of ${block.name.split('—')[0].trim()}</div>`;
 
-  const upcoming = RACES.find(r => toDate(r.end) >= today) || RACES[RACES.length-1];
+  const upcoming = RACES.find(r => !r.backup && toDate(r.end) >= today) || aRaceOf(RACES);
   document.getElementById('next-race-name').textContent = upcoming.name;
   const startStr = fmtShort(upcoming.start);
   const endStr = upcoming.start !== upcoming.end ? '–' + toDate(upcoming.end).getDate() : '';
@@ -1439,7 +1660,11 @@ function render(){
     const li = document.createElement('li');
     li.className = (isPast ? 'past ' : '') + (isNext ? 'next' : '');
     const endStr2 = r.start !== r.end ? '–' + toDate(r.end).getDate() : '';
-    li.innerHTML = `<div class="lwhen">${fmtShort(r.start)}${endStr2}</div><div><div class="lname">${r.name}</div><div class="ltag">${r.tag}</div></div>`;
+    const badge = r.badge ? `<span class="lbadge">${r.badge}</span>` : '';
+    li.innerHTML = `<div class="lwhen">${fmtShort(r.start)}${endStr2}</div>` +
+      `<div><div class="lname">${r.name}${badge}</div>` +
+      `<div class="ltag">${r.tag}</div>` +
+      `<div class="lsignup">${signupHtml(r)}</div></div>`;
     ladder.appendChild(li);
   });
 }
