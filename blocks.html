@@ -66,10 +66,67 @@
 <nav id="bf-nav"><a href="index.html">Today</a><a href="progress.html">Progress</a><a href="log.html">Log</a><a href="blocks.html" aria-current="page">Blocks</a><a href="plan.html">Race plan</a><a href="weeks.html">Every week</a></nav>
 <main class="doc">
 <h1>Bigfoot 200 — Block Targets &amp; Monitoring</h1>
-<p><strong>Race:</strong> August 13, 2027 · 200–208 mi · 44,000–45,500 ft · sub-100 hr for WS qualification <strong>Today:</strong> September 6, 2026 · 49 weeks · 5 blocks</p>
+<p><strong>Race:</strong> August 13, 2027 · <strong>200.1 mi · 44,082 ft gain · 45,563 ft loss</strong> · 107-hour cutoff · sub-100 hr for WS qualification <strong>49 weeks · 5 blocks.</strong> Last revised <strong>2026-09-15</strong>.</p>
+<blockquote>
+<p>Course figures corrected 2026-09-15. This page previously said 200–208 mi / 44,000–45,500 ft, which describes the <strong>retired</strong> version of the course with aid at Windy Ridge and Johnston Ridge. The numbers above come from the official manual and sum exactly — see <code>sub100-plan.md</code>.</p>
+</blockquote>
 <hr />
 <h2>The long day is Sunday</h2>
 <p>Moved from Saturday on 2026-09-12. Saturday is now recovery — up to 6 miles, easy — or day one of a back-to-back weekend. Races and the Three Sisters multi-day keep their real dates, which are Saturdays; the Sunday after one of those is recovery or day two, not a fresh long day. <code>plan/schedule.json</code> keys the dated progression by DATE (<code>longDays</code>), not by weekday, so nothing has to be re-dated if a weekend moves again.</p>
+<hr />
+<h2>The week, rebuilt 2026-09-15</h2>
+<p>Five running days. Run-specific capacity is the weakest gate in the model — <strong>21% now, projecting 25%</strong> — and Bigfoot is only a hiking race if you are willing to walk the runnable two thirds of it. Sub-100 lives in the parts you can still run on day four.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Day</th>
+<th>Session</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monday</strong></td>
+<td><strong>Full rest.</strong> No running, no strength, no capped walk that becomes three miles.</td>
+</tr>
+<tr>
+<td><strong>Tuesday</strong></td>
+<td><strong>Uphill tempo + power strides.</strong> 3×5 → 3×10 → 2×15 on a three-week ladder, Z3, then 5×20 sec strides at ~85% effort on a moderate grade.</td>
+</tr>
+<tr>
+<td><strong>Wednesday</strong></td>
+<td><strong>Easy Z2 run + eccentric strength.</strong> Single-leg box step-downs 3×10, weighted step-ups with the pack 3×12, single-leg RDLs 3×10, loaded carries.</td>
+</tr>
+<tr>
+<td><strong>Thursday</strong></td>
+<td><strong>Sustained downhill.</strong> 15 → 20 → 25 min of <em>continuous</em> descent, on rock, late in the day.</td>
+</tr>
+<tr>
+<td><strong>Friday</strong></td>
+<td><strong>Recovery jog</strong>, Z1.</td>
+</tr>
+<tr>
+<td><strong>Saturday</strong></td>
+<td>Recovery, or day one of a back-to-back, or a race.</td>
+</tr>
+<tr>
+<td><strong>Sunday</strong></td>
+<td><strong>The long day.</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Session length ramps by block — 45 min midweek in Block 1, up to 90 on Thursdays by Block 4 — because <strong>frequency, not one big day, is how running tolerance rises.</strong> Five short days already spends a 12 mi/week tolerance.</p>
+<p><strong>The release valve, stated on every running day:</strong> if the week's running miles are at or over Garmin's current running tolerance, <strong>Friday becomes a walk</strong> before anything else is cut.</p>
+<h3>What this replaced, and why</h3>
+<ul>
+<li><strong>Monday's incline intervals</strong> were the only vertical-specific session and they never got harder. The uphill ladder on Tuesday progresses.</li>
+<li><strong>The LeBron ramp</strong> was a fixed 10–12 reps, forever, described in the plan's own notes as "not a vertical-volume session." It is now the downhill day.</li>
+<li><strong>Sustained downhill did not exist.</strong> <code>coaching-references.md</code> has named it as gap #1 since September 11 — <em>"the most race-specific session available and completely absent"</em> — while the course loses 45,563 ft, more than it climbs. The one measured descent gap, Sep 13, was <strong>8 bpm against a ≥15 target</strong>.</li>
+<li><strong>Strength was generic.</strong> It is now eccentric and single-leg, which is the quality that fails on descent.</li>
+</ul>
+<h3>The long day has two different jobs, and only one has a cap</h3>
+<p>A long day run for <strong>aerobic stimulus</strong> is capped at <strong>8 hours</strong>. Past that the musculoskeletal damage and recovery debt climb faster than the aerobic return; Koop's worked progression tops out near 8, and Burt prefers back-to-backs precisely because they cost less than one enormous effort.</p>
+<p>A long day run for <strong>night movement, a real sleep stop, and aid rehearsal</strong> is a different session with a different purpose, and back-to-backs cannot substitute for it. Blocks 4 and 5 each keep one, at 14 and 16 hours. Neither is an aerobic workout — they exist so that hour 18, in the dark, alone, is not new information on race day.</p>
+<p>This is why the peak-day numbers dropped from 8/10/12/16/20 to <strong>6/8/10/14/16</strong>, and it is worth being blunt about the consequence: <em>longest single day</em> is a 20%-weight gate in the odds model. Lowering the target raises that gate's percentage without you having done anything. The number will move for a reason that is not fitness.</p>
 <hr />
 <h2>How to read this</h2>
 <p><strong>Targets</strong> are things you train toward and either hit or miss. <strong>Monitors</strong> are things you watch. They have thresholds, not goals. Chasing them is how people overtrain.</p>
@@ -106,7 +163,7 @@
 </tr>
 <tr>
 <td>Max HR</td>
-<td>205 (measured)</td>
+<td><strong>196</strong> — corrected 2026-09-14. Every reading above it (233, 210, 209, 207, 205) came on a day with no logged workout: optical-sensor artifact, not effort. Highest on a genuinely hard day is 196. Strava was using an age-derived ~185.</td>
 </tr>
 <tr>
 <td>Zone 2 / Zone 3</td>
@@ -171,11 +228,11 @@
 </tr>
 <tr>
 <td>Peak long day</td>
-<td><strong>8–10 hr</strong> (by late Oct)</td>
+<td><strong>6 hr</strong> (by late Oct)</td>
 </tr>
 <tr>
 <td>Longest continuous effort</td>
-<td><strong>7 hr</strong></td>
+<td><strong>6 hr</strong></td>
 </tr>
 <tr>
 <td>Back-to-back weekends</td>
@@ -221,11 +278,11 @@
 </tr>
 <tr>
 <td>Peak long day</td>
-<td><strong>10–12 hr</strong></td>
+<td><strong>8 hr</strong></td>
 </tr>
 <tr>
 <td>Longest continuous effort</td>
-<td><strong>9 hr</strong></td>
+<td><strong>8 hr</strong></td>
 </tr>
 <tr>
 <td>Back-to-back weekends</td>
@@ -271,11 +328,11 @@
 </tr>
 <tr>
 <td>Peak long day</td>
-<td><strong>12–14 hr</strong></td>
+<td><strong>10 hr</strong> — the 6 hr overnight, extended</td>
 </tr>
 <tr>
 <td>Longest continuous effort</td>
-<td><strong>11 hr</strong></td>
+<td><strong>10 hr</strong></td>
 </tr>
 <tr>
 <td>Back-to-back weekends</td>
@@ -321,7 +378,7 @@
 </tr>
 <tr>
 <td>Peak long day</td>
-<td><strong>16–18 hr</strong></td>
+<td><strong>14 hr</strong> — the full-night session, not a daytime volume day</td>
 </tr>
 <tr>
 <td>Longest continuous effort</td>
@@ -360,7 +417,7 @@
 <tbody>
 <tr>
 <td>Weeks 3–5</td>
-<td>Peak: <strong>20–22 hr/week</strong>, <strong>10,000 ft/week</strong>, one 20 hr day</td>
+<td>Peak: <strong>20–22 hr/week</strong>, <strong>10,000 ft/week</strong>, one <strong>16 hr overnight</strong></td>
 </tr>
 <tr>
 <td>Week 6</td>
@@ -386,7 +443,7 @@
 </tr>
 <tr>
 <td>Longest single effort</td>
-<td><strong>20 hr</strong></td>
+<td><strong>16 hr</strong> — an overnight, for the night and the sleep stop, not for aerobic stimulus</td>
 </tr>
 <tr>
 <td>Night hours by race day</td>
@@ -439,6 +496,7 @@
 <th>Vert/wk</th>
 <th>Miles/wk</th>
 <th>Peak day</th>
+<th>ft/hr</th>
 <th>Night hrs</th>
 </tr>
 </thead>
@@ -448,7 +506,8 @@
 <td>8.8</td>
 <td>1,700</td>
 <td>29</td>
-<td>3 hr</td>
+<td><strong>3.0 hr</strong></td>
+<td>221</td>
 <td>0</td>
 </tr>
 <tr>
@@ -456,7 +515,8 @@
 <td>12</td>
 <td>3,500</td>
 <td>45</td>
-<td>8–10 hr</td>
+<td>6 hr</td>
+<td>292</td>
 <td>3</td>
 </tr>
 <tr>
@@ -464,7 +524,8 @@
 <td>14</td>
 <td>5,000</td>
 <td>50</td>
-<td>10–12 hr</td>
+<td>8 hr</td>
+<td>357</td>
 <td>6</td>
 </tr>
 <tr>
@@ -472,7 +533,8 @@
 <td>16</td>
 <td>6,500</td>
 <td>55</td>
-<td>12–14 hr</td>
+<td>10 hr</td>
+<td>406</td>
 <td>12</td>
 </tr>
 <tr>
@@ -480,7 +542,8 @@
 <td>18</td>
 <td>8,000</td>
 <td>60</td>
-<td>16–18 hr</td>
+<td>14 hr</td>
+<td>444</td>
 <td>20</td>
 </tr>
 <tr>
@@ -488,11 +551,22 @@
 <td>20–22</td>
 <td>10,000</td>
 <td>65</td>
-<td>20 hr</td>
+<td>16 hr</td>
+<td>476</td>
 <td>30+</td>
+</tr>
+<tr>
+<td><em>the race</em></td>
+<td>—</td>
+<td>44,082 total</td>
+<td>200.1</td>
+<td>97 hr</td>
+<td><strong>508 moving</strong></td>
+<td>~40</td>
 </tr>
 </tbody>
 </table></div>
+<p>The <strong>ft/hr</strong> column is the one to watch: it climbs smoothly to just under race pace rather than overshooting it. Cutting weekly hours without cutting vertical would push it above 500 — asking you to train steeper, every hour of every week, than you will ever race. Your last complete week was <strong>221</strong>.</p>
 <p>Cumulative vertical across all five blocks lands near <strong>275,000 ft</strong> — about 6.2× the race itself. That ratio is still the point; the earlier 380,000 figure came from targets scaled off an overstated baseline.</p>
 <p><strong>Rescaled 2026-09-11.</strong> Every row above was shifted down one rung because the plan's assumed starting point (12 hr/wk, 3,000 ft, 45 mi) was 27–43% above what is actually being trained (8.8 hr, 1,700 ft, 29 mi). The shape of the progression is unchanged — only its starting height.</p>
 <hr />
@@ -500,9 +574,12 @@
 <h2>Aerobic durability (the real predictor)</h2>
 <p><strong>Descent HR gap.</strong> On any long day, average HR on sustained descent versus sustained climb.</p>
 <ul>
-<li>Baseline: 15–20 bpm (yesterday's hike)</li>
+<li>Baseline: 15–20 bpm</li>
+<li><strong>Measured Sep 5 (hike, 3.0 hr): 15 bpm</strong> — climb 138, descent 122. Passing.</li>
+<li><strong>Measured Sep 13 (trail run, 1.9 hr): 8 bpm</strong> — climb 122, descent 114. Failing, on a short day that should have been comfortable.</li>
 <li>July 19 comparison: 2 bpm — the fatigued pattern</li>
 <li><strong>Watch:</strong> gap under 10 bpm on a day that should be comfortable means under-recovery. Two in a row, cut the week.</li>
+<li>This is the monitor Thursday's sustained-downhill session exists to move.</li>
 </ul>
 <p><strong>Aerobic decoupling.</strong> Pace-to-HR ratio, first half vs second half of long days.</p>
 <ul>
@@ -513,6 +590,23 @@
 <ul>
 <li>Over 15% of a long day above 150 means it was a workout, not a long day</li>
 </ul>
+<h2>Training load — an action, not just a reading</h2>
+<p><strong>Acute:chronic workload ratio.</strong> The weekly report has always printed this and never told you to do anything with it.</p>
+<ul>
+<li><strong>0.8–1.3:</strong> the band to live in</li>
+<li><strong>Above 1.45:</strong> cut the weekend long day by 30%. Do not add on top of it.</li>
+<li><strong>Below 0.8 for three weeks:</strong> you are detraining, not recovering</li>
+</ul>
+<p>It went <strong>0.73 → 1.40 in a single week</strong> at the start of Block 1. A number that moves that fast needs a rule attached to it. <em>(Added 2026-09-15.)</em></p>
+<h2>Running tolerance — the guardrail on five running days</h2>
+<p>Garmin computes this. It was <strong>12 mi/week</strong> at baseline with status <em>"Low impact load."</em> The week is now built around five running days, which makes this the binding constraint rather than a curiosity.</p>
+<ul>
+<li><strong>Weekly running miles stay at or under tolerance.</strong> Over it repeatedly is the clearest overtraining signal available.</li>
+<li><strong>Raise it by frequency, not by one big day</strong> — which is exactly what the five short midweek sessions are for.</li>
+<li><strong>Cap the ramp at 10%/week</strong> (Holz). 12 → 14.5 → 17.6 → 21.3 → ~26 by Nov 7.</li>
+<li><strong>When running miles reach tolerance, Friday becomes a walk.</strong> That is the release valve, and it is deliberately the smallest session of the week so that spending it costs nothing.</li>
+</ul>
+<p>The reason this matters more than weekly hours: hours went to <strong>126% of target</strong> in the week of Sep 7 while running was <strong>10 miles against a 12-mile tolerance</strong> — up from 2 the week before. In hours that looks like a good week. In impact load it is the steepest thing in the plan. <em>(Added 2026-09-15.)</em></p>
 <h2>VO2 max — monitor, do not chase</h2>
 <p>Current <strong>42.0</strong>. Expect 43–46 by Bighorn as a byproduct.</p>
 <p>It will likely <strong>decline during Blocks 4 and 5.</strong> That is normal under high volume and is not a warning sign. For a 105-hour race, VO2 max is close to irrelevant. If you find yourself training to move this number, you are training for the wrong race.</p>
@@ -520,10 +614,12 @@
 <p>Establish a <strong>30-day rolling baseline</strong> once the Garmin backfill runs.</p>
 <ul>
 <li>Single low day: ignore</li>
+<li><strong>Status "Unbalanced" 4 consecutive days:</strong> downgrade — Tuesday's intervals and Thursday's descent become easy Z1, everything else stands. Four days is a real signal, and seven was too late to act on. <em>(Added 2026-09-15.)</em></li>
 <li><strong>7-day average down &gt;10% from baseline:</strong> cut volume 30% that week</li>
 <li><strong>Status "Unbalanced" for 7+ consecutive days:</strong> take 3 full days off</li>
 <li>Rising or stable through a build block: the load is being absorbed</li>
 </ul>
+<p>As of the week of 2026-09-07 this sat at <strong>6 of 7 days unbalanced</strong> — past the new downgrade trigger, one day short of the stop trigger.</p>
 <h2>Resting HR</h2>
 <ul>
 <li>Establish baseline from backfill</li>
@@ -605,21 +701,54 @@
 <p>Balanced at 42–50 ms inside the baseline band through ~Sep 5. <strong>Unbalanced from ~Sep 7</strong> at 35–38, below the band, with one Low day around Sep 9 — beginning two days after Block 1 opened and acute training load climbed from ~200 to ~300 (top edge of optimal). Sleep and body battery are unaffected so far.</p>
 <p>Under the HRV rules above, five days of Unbalanced is not yet the three-days-off trigger, but a seventh consecutive day is.</p>
 <hr />
-<h2>Missing sessions — adopt from published coaching</h2>
-<p>See <code>coaching-references.md</code>. Three gaps the current week does not cover, all from Destination Trail's own coach:</p>
+<h2>Missing sessions — adopted 2026-09-15</h2>
+<p><code>coaching-references.md</code> named three gaps on 2026-09-11. All three are now in the week rather than in a list of things to do:</p>
 <ol>
-<li><strong>Sustained downhill, 10–30 min continuous.</strong> The most race-specific session available and completely absent. Bigfoot descends 45,563 ft — more than it climbs — and Block 1's question is whether you can descend hard without wrecking your quads. Add it to the Sunday long day, late in the day, on rock.</li>
-<li><strong>Uphill tempo intervals, progressed weekly:</strong> 3×5 min → 3×10 min → 2×15 min. Replaces the fixed LeBron ramp prescription with something that builds.</li>
-<li><strong>A carbohydrate target: up to 120 g/hr</strong>, rehearsed on every long day. The plan currently says "eat every 40 minutes" without a number.</li>
+<li><strong>Sustained downhill, continuous.</strong> ✅ Thursday, its own session, 15 → 20 → 25 min of unbroken descent, on rock, late in the day. Was gap #1 for four days while nothing in the week descended on purpose.</li>
+<li><strong>Uphill tempo intervals, progressed.</strong> ✅ Tuesday, 3×5 → 3×10 → 2×15 on a three-week ladder that pauses for deloads rather than resetting.</li>
+<li><strong>A carbohydrate number.</strong> ✅ Ramp it rather than starting at the ceiling:</li>
 </ol>
-<p>Also worth noting: Holz caps weekly progression at <strong>10%</strong>, and this plan steps 13–20% between blocks off a baseline that was already overstated.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>When</th>
+<th>Target</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Block 1</td>
+<td><strong>60–70 g/hr</strong></td>
+<td>Start where your gut already is</td>
+</tr>
+<tr>
+<td>Block 2–3</td>
+<td><strong>70–90 g/hr</strong></td>
+<td>Build tolerance on every long day</td>
+</tr>
+<tr>
+<td>Block 4–5</td>
+<td><strong>90–100 g/hr</strong></td>
+<td>Race rehearsal, with race food, from the pack</td>
+</tr>
+<tr>
+<td>Ceiling</td>
+<td>120 g/hr (Holz)</td>
+<td>Only if the gut gets there — it is trained, not chosen</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rehearse on <strong>every</strong> long day with the food you will actually carry. "Eat every 40 minutes" stays as the timer; the grams are what it is timing.</p>
+<p>Also worth noting: Holz caps weekly progression at <strong>10%</strong>, and this plan steps 13–20% between blocks off a baseline that was already overstated. That cap now has a rule attached for the metric where it bites hardest — see <em>Running tolerance</em> above.</p>
 <h2>Non-negotiables</h2>
 <ol>
 <li><strong>Night hours accumulate on schedule.</strong> Zero today. This is the cheapest gap to close and the one most likely to be skipped.</li>
 <li><strong>Bighorn is a gate, not a formality.</strong> Decide the rule now.</li>
 <li><strong>Descent training happens on rock</strong>, not loam, and late in the day.</li>
 <li><strong>Feet get managed from hour five</strong>, not hour nine. Practice in training.</li>
-<li><strong>Eat every 40 minutes</strong> on every long day, including when you don't want to.</li>
+<li><strong>Eat every 40 minutes</strong> on every long day, including when you don't want to — and hit the gram target above, not just the timer.</li>
+<li><strong>Friday is the release valve.</strong> When running miles reach tolerance, it becomes a walk. Cutting Friday is cheap; cutting Thursday or Sunday is not.</li>
 </ol>
 <hr />
 <h2>Review cadence</h2>
