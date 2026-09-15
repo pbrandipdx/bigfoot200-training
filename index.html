@@ -819,6 +819,13 @@ function fmtShort(s){
 
 const today = new Date(); today.setHours(0,0,0,0);
 
+// Shared day-level schedule logic. Included verbatim into BOTH
+// dashboard/template.html (Today) and dashboard/weeks_template.html (Every
+// week) at build time, so the two pages can never drift on what a given day is.
+//
+// Expects these to already exist in the page: BLOCKS, DATA.longDays, today,
+// toDate(), daysBetween().
+
 function blockFor(d){
   for(const b of BLOCKS){
     if(d >= toDate(b.start) && d <= toDate(b.end)) return b;
@@ -918,6 +925,7 @@ function scheduleFor(date){
 
 // Weeks run Monday -> Sunday, matching tracker/REFRESH.md and the block boundaries.
 const DAY_NAMES = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
 
 function mondayOf(d){
   const m = new Date(d);

@@ -41,6 +41,23 @@
   @media(min-width:620px){.bk-tgt{flex-basis:auto;margin-left:auto}}
 
   .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 20px}
+  /* block recap - visible whether the block is open or closed */
+  .recap{flex-basis:100%;display:flex;flex-wrap:wrap;gap:0;margin:10px 0 2px;
+    border:1px solid var(--line);border-radius:5px;background:var(--white);
+    overflow:hidden}
+  .st{flex:1 1 33.333%;min-width:104px;padding:9px 11px;
+    border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .st:nth-child(3n){border-right:0}
+  .st-k{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--ink-faint);font-weight:600}
+  .st-v{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;
+    line-height:1.25;margin-top:2px}
+  .st-s{font-size:11.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  .st-v .hit{color:var(--good)} .st-v .miss{color:var(--bad)}
+  @media(min-width:620px){ .st{flex:1 1 0} .st:nth-child(3n){border-right:1px solid var(--line)}
+    .st:last-child{border-right:0} .recap{flex-wrap:nowrap} }
+  @media(max-width:619px){ .st{border-bottom:1px solid var(--line)} }
+
   table{border-collapse:collapse;width:100%;font-size:13.5px}
   /* On a phone the hour columns are the least useful pair - vertical is what
      decides this race - so they drop out before the table starts scrolling. */
@@ -58,6 +75,25 @@
   tr.now td:first-child{box-shadow:inset 2px 0 0 var(--amber-deep)}
   tr.done td{color:var(--ink-soft)}
   tr.race td{background:rgba(176,121,58,.10)}
+  tr.wkrow{cursor:pointer}
+  tr.wkrow:hover td{background:var(--paper-2)}
+  tr.wkrow td:first-child{padding-left:20px;position:relative}
+  tr.wkrow td:first-child::before{content:'';position:absolute;left:4px;top:15px;
+    width:5px;height:5px;border-right:1.5px solid var(--ink-faint);
+    border-bottom:1.5px solid var(--ink-faint);
+    transform:rotate(-45deg);transition:transform .15s}
+  tr.wkrow.open td:first-child::before{transform:rotate(45deg)}
+  tr.now td:first-child{box-shadow:inset 2px 0 0 var(--amber-deep)}
+  tr.day{display:none}
+  tr.day.show{display:table-row}
+  tr.day td{background:var(--paper-2);border-bottom:1px solid var(--line);
+    padding-top:7px;padding-bottom:7px;font-size:13px}
+  tr.day td:first-child{padding-left:20px}
+  tr.day.dnow td{background:rgba(176,121,58,.12)}
+  .dname{font-weight:600;white-space:nowrap}
+  .ddate{color:var(--ink-faint);font-weight:400;font-size:12px}
+  .dtitle{font-weight:500}
+  .ddesc{display:block;color:var(--ink-faint);font-size:12.5px;line-height:1.5}
   .wk{font-weight:600;white-space:nowrap}
   .dates{color:var(--ink-faint);font-size:12px;display:block;font-weight:400}
   .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;
@@ -99,6 +135,7 @@
     <span><b>Plan</b> the block's weekly target</span>
     <span><b>Actual</b> what you logged</span>
     <span><b>Vert</b> is the one that decides this race</span>
+    <span>Tap any week for its seven days</span>
   </div>
 
   <div id="blocks"></div>
@@ -125,11 +162,114 @@ const mondayOf = d => { const m=new Date(d); m.setDate(d.getDate()-((d.getDay()+
                         m.setHours(0,0,0,0); return m; };
 const fmt = (d,o) => d.toLocaleDateString(undefined, o || {month:'short',day:'numeric'});
 
+function daysBetween(a,b){ return Math.round((b-a)/86400000); }
+// Shared day-level schedule logic. Included verbatim into BOTH
+// dashboard/template.html (Today) and dashboard/weeks_template.html (Every
+// week) at build time, so the two pages can never drift on what a given day is.
+//
+// Expects these to already exist in the page: BLOCKS, DATA.longDays, today,
+// toDate(), daysBetween().
+
 function blockFor(d){
-  for(const b of BLOCKS) if(d >= toDate(b.start) && d <= toDate(b.end)) return b;
-  return d < toDate(BLOCKS[0].start) ? BLOCKS[0] : BLOCKS[BLOCKS.length-1];
+  for(const b of BLOCKS){
+    if(d >= toDate(b.start) && d <= toDate(b.end)) return b;
+  }
+  if(d < toDate(BLOCKS[0].start)) return BLOCKS[0];
+  return BLOCKS[BLOCKS.length-1];
 }
-function plannedFor(d){ return LONGDAYS.find(s => s.date === iso(d)) || null; }
+
+function currentBlock(){ return blockFor(today); }
+
+function weekOfBlock(block){
+  return Math.floor(daysBetween(toDate(block.start), today)/7) + 1;
+}
+
+function ordinalOfMonth(d){
+  return Math.floor((d.getDate()-1)/7) + 1;
+}
+
+function fmtIso(d){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+// The dated plan lives in plan/schedule.json "longDays" and is keyed by DATE,
+// not by weekday: the weekly long day is Sunday, but a race keeps its real
+// date and a multi-day trip keeps its real start, both of which are Saturdays.
+function plannedFor(d){
+  return (DATA.longDays||[]).find(s => s.date === fmtIso(d)) || null;
+}
+
+function fromPlanned(p){
+  const showVert = p.vert && !/^(race|multi-day|—)$/.test(p.vert);
+  return { title: p.title + (showVert ? '  ·  ' + p.vert : ''),
+           desc: p.desc, vert: p.vert };
+}
+
+// SUNDAY is the long day.
+function sundayWorkout(block, d){
+  const p = plannedFor(d);
+  if(p) return fromPlanned(p);
+  // If Saturday carried a dated entry — a race, or a multi-day start — Sunday
+  // belongs to it. Do not hand back a fresh long day the morning after a 50K.
+  const sat = new Date(d); sat.setDate(sat.getDate()-1);
+  const satPlan = plannedFor(sat);
+  if(satPlan){
+    if(/multi-day/i.test(satPlan.vert || '')){
+      return { title: satPlan.title + ' — day two', desc:'The trip continues. Time on feet is the point; let the terrain set the pace.' };
+    }
+    return { title:'Recovery — the day after ' + satPlan.title,
+             desc:'Walk, or nothing. The long day already happened yesterday.' };
+  }
+  const nth = ordinalOfMonth(d);
+  if(!block.taper){
+    if(nth === 1) return { title:'Overnight long day', desc:'Evening/night start (~9pm–3am) — night-running exposure, targeting the overnight fade window seen in the split data. (No dated plan for this Sunday yet.)' };
+    if(nth === 3) return { title:'Back-to-back weekend — Sunday', desc:`The second and harder of the two days: target ${block.vert} of vertical on legs that are already tired. (No dated plan for this Sunday yet.)` };
+  }
+  return { title:'Long day, vertical-focused', desc:`Target ${block.vert} of vertical this block. (No dated plan for this Sunday yet.)` };
+}
+
+// SATURDAY is the recovery slot, or day one of a back-to-back — unless a race
+// or a multi-day trip is dated on it.
+function saturdayWorkout(block, d){
+  const p = plannedFor(d);
+  if(p) return fromPlanned(p);
+  const sun = new Date(d); sun.setDate(sun.getDate()+1);
+  if(!block.taper && ordinalOfMonth(sun) === 3 && !plannedFor(sun)){
+    return { title:'Back-to-back weekend — Saturday', desc:'Day one of two. Long, but held back — Sunday is the day that has to hurt. (No dated plan for this weekend yet.)' };
+  }
+  return { title:'Flexible recovery', desc:'Up to 6 miles, easy. Sunday is the long day — arrive at it fresh enough to do it properly.' };
+}
+
+function thursdayWorkout(block){
+  if(block.id === 1){
+    return { title:'LeBron ramp repeats', desc:'10–12 reps, run up / walk down, 150–160 bpm. Real vertical here is modest (~250–300 ft) \u2014 Monday\u2019s incline intervals are the actual vertical-volume session; this one is about real-terrain movement.' };
+  }
+  const wk = weekOfBlock(block);
+  if(wk % 2 === 0){
+    return { title:'LeBron ramp — down-focus', desc:'Walk up conservatively, run down under control at race effort. Builds the eccentric quad durability the course\u2019s 45,563 ft of descent demands \u2014 the point isn\u2019t vertical volume, it\u2019s the descent itself.' };
+  }
+  return { title:'LeBron ramp — up-focus', desc:'Run up, walk down, 150–160 bpm. Real-terrain movement, not a vertical-volume session \u2014 Monday\u2019s incline intervals cover that.' };
+}
+
+function scheduleFor(date){
+  // Use the block that CONTAINS this date. Looking two weeks ahead can cross a
+  // block boundary, and currentBlock() would hand back today's block instead.
+  const block = blockFor(date);
+  const dow = date.getDay(); // 0 Sun .. 6 Sat
+  switch(dow){
+    case 1: return { title:'Strength A + incline intervals', desc:'4×3 min, 150–160 bpm, 15–18% grade treadmill.' };
+    case 2: return { title:'Rest + capped walk', desc:'Up to 3 miles / under 1 hour. Not training — doesn\u2019t count toward compliance.' };
+    case 3: return { title:'Easy run', desc:'25–30 min, Nike Jogging Trail.' };
+    case 4: return thursdayWorkout(block);
+    case 5: return { title:'Rest', desc:'Full rest day.' };
+    case 6: return saturdayWorkout(block, date);
+    case 0: return sundayWorkout(block, date);
+  }
+}
+
+// Weeks run Monday -> Sunday, matching tracker/REFRESH.md and the block boundaries.
+const DAY_NAMES = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
 
 // races that fall inside [a,b]
 function racesIn(a, b){
@@ -144,14 +284,26 @@ function headline(monday){
     const p = plannedFor(d);
     if(p) return {title: p.title, vert: p.vert, dated: true};
   }
-  const blk = blockFor(monday);
   const sun = new Date(monday); sun.setDate(monday.getDate()+6);
-  const nth = Math.floor((sun.getDate()-1)/7) + 1;
-  if(!blk.taper){
-    if(nth === 1) return {title:'Overnight long day', vert:null, dated:false};
-    if(nth === 3) return {title:'Back-to-back weekend', vert:null, dated:false};
+  return {title: scheduleFor(sun).title, vert:null, dated:false};
+}
+
+const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+// The seven days of one week, using the SAME scheduleFor() the Today page uses.
+function dayRowsHtml(monday){
+  let out = '';
+  for(let i=0;i<7;i++){
+    const d = new Date(monday); d.setDate(monday.getDate()+i);
+    const w = scheduleFor(d);
+    const isToday = iso(d) === iso(today);
+    out += `<tr class="day${isToday ? ' dnow' : ''}">
+      <td class="dname">${DAYS[i]} <span class="ddate">${fmt(d)}</span>${
+        isToday ? ' <span class="tag t-now">today</span>' : ''}</td>
+      <td colspan="5"><span class="dtitle">${w.title}</span>
+        <span class="ddesc">${w.desc || ''}</span></td></tr>`;
   }
-  return {title:'Long day, vertical-focused', vert:null, dated:false};
+  return out;
 }
 
 function pctCell(actual, target){
@@ -200,7 +352,9 @@ function render(){
       const cls = [isNow ? 'now' : '', isDone ? 'done' : '', rs.length ? 'race' : '']
                     .filter(Boolean).join(' ');
 
-      rows += `<tr class="${cls}">
+      const wid = `${blk.id}-${i}`;
+      rows += `<tr class="wkrow ${cls}" data-w="${wid}" tabindex="0" role="button"
+                   aria-expanded="false" aria-controls="d-${wid}">
         <td class="wk">Wk ${i+1}${tags.join('')}
           <span class="dates">${fmt(m)} – ${fmt(sun)}</span></td>
         <td><span class="long">${h.title}</span>${
@@ -214,16 +368,54 @@ function render(){
         <td class="num">${t.vertFtPerWeek ? t.vertFtPerWeek.toLocaleString() : '—'}</td>
         <td class="num">${a ? a.vert_ft.toLocaleString() : '<span class="pend">—</span>'}</td>
         <td class="num">${t.vertFtPerWeek ? pctCell(a && a.vert_ft, t.vertFtPerWeek) : '—'}</td>
-      </tr>`;
+      </tr>` + dayRowsHtml(m).replace(/<tr class="day/g,
+              `<tr id="d-${wid}" data-d="${wid}" class="day`);
     });
+
+    // ---- block recap: what the block asks for, and what it has had so far.
+    // Compare actuals against the plan for the weeks that have FINISHED, not
+    // against the whole block - otherwise week 1 of 14 always reads as a miss.
+    const logged = mine.filter(w => ACTUAL[iso(w)]);
+    const sum = k => logged.reduce((n,w) => n + (ACTUAL[iso(w)][k] || 0), 0);
+    const aHours = sum('hours'), aVert = sum('vert_ft'), aMiles = sum('miles');
+    const pHours = (t.hoursPerWeek||0) * logged.length,
+          pVert  = (t.vertFtPerWeek||0) * logged.length,
+          pMiles = (t.milesPerWeek||0) * logged.length;
+    const dens = t.hoursPerWeek ? Math.round(t.vertFtPerWeek / t.hoursPerWeek) : 0;
+    const aDens = aHours ? Math.round(aVert / aHours) : null;
+    const r1 = Math.round(aHours*10)/10;
+
+    const stat = (k, v, s) => `<div class="st"><div class="st-k">${k}</div>` +
+                              `<div class="st-v">${v}</div><div class="st-s">${s}</div></div>`;
+    const vs = (a, p, fmtf) => {
+      if(!logged.length) return '<span class="pend">—</span>';
+      const pc = p ? Math.round(100*a/p) : null;
+      const cl = pc === null ? '' : (pc >= 90 ? 'hit' : (pc < 70 ? 'miss' : ''));
+      return `<span class="${cl}">${fmtf(a)}</span>`;
+    };
+    const pcOf = (a,p) => (!logged.length || !p) ? '—' : Math.round(100*a/p) + '% of plan';
+    const n0 = x => Math.round(x).toLocaleString();
+
+    const recap =
+      `<div class="recap">` +
+      stat('Weeks', `${logged.length} <span class="st-s">of ${mine.length}</span>`,
+           logged.length ? `${mine.length - logged.length} to go` : 'not started') +
+      stat('Hours', vs(aHours, pHours, x => Math.round(x*10)/10), pcOf(aHours, pHours)) +
+      stat('Vertical', vs(aVert, pVert, n0), pcOf(aVert, pVert)) +
+      stat('Miles', vs(aMiles, pMiles, x => Math.round(x)), pcOf(aMiles, pMiles)) +
+      stat('Ft per hour', aDens ? `<span class="${aDens >= dens*0.9 ? 'hit' : (aDens < dens*0.7 ? 'miss' : '')}">${aDens}</span>` : '<span class="pend">—</span>',
+           `target ${dens}`) +
+      stat('Block total', `${n0((t.vertFtPerWeek||0)*mine.length)} ft`,
+           `${(t.hoursPerWeek||0)*mine.length} hr · ${n0((t.milesPerWeek||0)*mine.length)} mi`) +
+      `</div>`;
 
     const det = document.createElement('details');
     det.className = 'blk';
     if(isCurrent) det.open = true;
     det.innerHTML = `<summary>
         <span class="bk-name">${blk.name}</span>
-        <span class="bk-when">${fmt(toDate(blk.start))} – ${fmt(toDate(blk.end))} · ${mine.length} weeks</span>
-        <span class="bk-tgt">${blk.hours} · ${blk.vert}/wk · ends ${blk.endsWith}</span>
+        <span class="bk-when">${fmt(toDate(blk.start))} – ${fmt(toDate(blk.end))} · ${mine.length} weeks · ends ${blk.endsWith}</span>
+        ${recap}
       </summary>
       <div class="tscroll"><table>
         <thead><tr>
@@ -237,6 +429,27 @@ function render(){
   });
 }
 render();
+
+// One delegated handler rather than 49 listeners. Keyboard works too, since the
+// rows are focusable buttons.
+function toggleWeek(tr){
+  const id = tr.dataset.w, open = tr.classList.toggle('open');
+  tr.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.querySelectorAll(`tr.day[data-d="${id}"]`)
+          .forEach(r => r.classList.toggle('show', open));
+}
+document.addEventListener('click', e => {
+  const tr = e.target.closest('tr.wkrow'); if(tr) toggleWeek(tr);
+});
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const tr = e.target.closest && e.target.closest('tr.wkrow');
+  if(tr){ e.preventDefault(); toggleWeek(tr); }
+});
+
+// open the current week so the page lands on something useful
+const nowRow = document.querySelector('tr.wkrow.now');
+if(nowRow) toggleWeek(nowRow);
 </script>
 </body>
 </html>
