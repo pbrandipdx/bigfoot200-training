@@ -66,10 +66,10 @@
 <nav id="bf-nav"><a href="index.html">Today</a><a href="progress.html" aria-current="page">Progress</a><a href="log.html">Log</a><a href="blocks.html">Blocks</a><a href="plan.html">Race plan</a><a href="weeks.html">Review</a></nav>
 <main class="doc">
 <h1>Week over week</h1>
-<p>Generated 2026-09-15 from Supabase <code>weekly_progress</code> — Strava activities plus Garmin daily and training metrics, Monday-start weeks.</p>
+<p>Generated 2026-09-23 from Supabase <code>weekly_progress</code> — Strava activities plus Garmin daily and training metrics, Monday-start weeks.</p>
 <p>Arrows compare with the previous week. <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span> and <span class="trend trend-good" title="down on last week - the direction you want" aria-label="down on last week - the direction you want">↓</span> are moving the way you want, <span class="trend trend-bad" title="up on last week - the wrong direction" aria-label="up on last week - the wrong direction">↑</span> and <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span> the wrong way, <span class="trend trend-level" title="level with last week" aria-label="level with last week">→</span> is unchanged. Hover any arrow for what it means.</p>
 <h2>Finish odds</h2>
-<p><strong>13–18%</strong> — <em>well behind</em>, 47 weeks out.</p>
+<p><strong>9–13%</strong> — <em>well behind</em>, 46 weeks out.</p>
 <p>That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against the final block's targets. Separately, you are at <strong>53% of what Block 1 asks for right now</strong> — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.</p>
 <div class="tw"><table>
 <thead>
@@ -84,26 +84,26 @@
 <tr>
 <td>Vertical per week</td>
 <td>20%</td>
-<td><code>██████░░░░</code> 62%</td>
-<td><code>███████░░░</code> 69%</td>
+<td><code>██████░░░░</code> 59%</td>
+<td><code>█░░░░░░░░░</code> 13%</td>
 </tr>
 <tr>
 <td>Longest single day</td>
 <td>20%</td>
 <td><code>█████░░░░░</code> 50%</td>
-<td><code>███░░░░░░░</code> 28%</td>
+<td><code>██░░░░░░░░</code> 19%</td>
 </tr>
 <tr>
 <td>Time on feet per week</td>
 <td>15%</td>
-<td><code>██████████</code> 100%</td>
-<td><code>██████████</code> 99%</td>
+<td><code>██████████</code> 97%</td>
+<td><code>████░░░░░░</code> 44%</td>
 </tr>
 <tr>
 <td>Run-specific capacity</td>
 <td>15%</td>
-<td><code>██░░░░░░░░</code> 21%</td>
-<td><code>███░░░░░░░</code> 25%</td>
+<td><code>██░░░░░░░░</code> 24%</td>
+<td><code>███░░░░░░░</code> 30%</td>
 </tr>
 <tr>
 <td>Night hours</td>
@@ -114,31 +114,31 @@
 <tr>
 <td>Week-to-week consistency</td>
 <td>10%</td>
-<td><code>████████░░</code> 75%</td>
-<td><code>████████░░</code> 75%</td>
+<td><code>██████░░░░</code> 62%</td>
+<td><code>██████░░░░</code> 62%</td>
 </tr>
 <tr>
 <td>Recovery headroom</td>
 <td>10%</td>
-<td><code>█████░░░░░</code> 53%</td>
-<td><code>█████░░░░░</code> 53%</td>
+<td><code>███████░░░</code> 68%</td>
+<td><code>███████░░░</code> 68%</td>
 </tr>
 <tr>
 <td><strong>Readiness</strong></td>
 <td></td>
 <td><strong>53%</strong></td>
-<td><strong>51%</strong></td>
+<td><strong>30%</strong></td>
 </tr>
 </tbody>
 </table></div>
-<p>Biggest drags on the trajectory number: <strong>Night hours</strong> and <strong>Run-specific capacity</strong>.</p>
+<p>Biggest drags on the trajectory number: <strong>Night hours</strong> and <strong>Vertical per week</strong>.</p>
 <blockquote>
 <p><strong>How this is built.</strong> Seven gates, each measured from Strava and Garmin, weighted as shown, averaged into a readiness score. The <em>now</em> column compares the last four to eight weeks against the current block's targets. The <em>projected</em> column fits the slope of the last eight weeks and carries it AT MOST 26 weeks, then holds it flat, against the final block's targets — it assumes you keep improving at exactly the rate you have been, no faster and no slower, which is why a flat eight weeks shows up as a flat projection. The readiness score is entirely measured. Turning it into a percentage needs a field-wide finish rate, and that part is an assumption: base rate 45–65% assumed for the FIELD at a 200-mile mountain race — Destination Trail does not publish starter counts — then scaled by how much of the distance ladder has actually been raced. Read the gate breakdown and the direction as signal; read the percentage as a rough band.</p>
 </blockquote>
 <blockquote>
 <p><strong>The ladder you have actually raced.</strong> Longest finish: <strong>a marathon in ~2006; no ultra finished yet</strong>, so the band above is scaled to <strong>45%</strong> of the field's. This is the one input no API can supply and the one the model was missing until 2026-09-15 — it read the training data, saw a solid block, and applied a finish rate belonging to a field of experienced 200-mile runners. It climbs on its own as races get finished: a 50K takes it to 60%, a 100K to 80%, a 100-miler to 100%. Update <code>LONGEST_FINISH_MI</code> in <code>tracker/odds.py</code> after each one.</p>
 </blockquote>
-<h2>Last complete week — 2026-09-07</h2>
+<h2>Last complete week — 2026-09-14</h2>
 <h3>Volume</h3>
 <div class="tw"><table>
 <thead>
@@ -153,43 +153,43 @@
 <tbody>
 <tr>
 <td>Hours</td>
-<td>15.1 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>12.1</td>
+<td>5.6 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
+<td>15.1</td>
 <td>12</td>
-<td>126%</td>
+<td>47%</td>
 </tr>
 <tr>
 <td>Miles</td>
-<td>36.6 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
-<td>39.6</td>
+<td>15.3 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
+<td>36.6</td>
 <td>45</td>
-<td>81%</td>
+<td>34%</td>
 </tr>
 <tr>
 <td>Vertical (ft)</td>
-<td>3333 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>2927</td>
+<td>528 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
+<td>3333</td>
 <td>3500</td>
-<td>95%</td>
+<td>15%</td>
 </tr>
 <tr>
 <td>Longest day (hr)</td>
-<td>2.1 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
-<td>3</td>
+<td>1.5 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
+<td>2.1</td>
 <td>6</td>
-<td>35%</td>
+<td>25%</td>
 </tr>
 <tr>
 <td>Best back-to-back (hr)</td>
-<td>5.4 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
-<td>6.8</td>
+<td>3.6 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
+<td>5.4</td>
 <td>two consecutive days</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Days on feet</td>
-<td>7 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>6</td>
+<td>3 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
+<td>7</td>
 <td>5–6</td>
 <td>—</td>
 </tr>
@@ -210,23 +210,23 @@
 <tbody>
 <tr>
 <td>Vertical per hour</td>
-<td>221 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
-<td>242</td>
+<td>94 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
+<td>221</td>
 <td>292 (race: 508)</td>
-<td>76%</td>
+<td>32%</td>
 </tr>
 <tr>
 <td>Running share of miles (%)</td>
-<td>27 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>5</td>
+<td>44 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
+<td>27</td>
 <td>30</td>
-<td>90%</td>
+<td>147%</td>
 </tr>
 <tr>
 <td>Running miles</td>
-<td>10 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>2</td>
-<td>tolerance 12</td>
+<td>6.7 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
+<td>10</td>
+<td>tolerance —</td>
 <td>—</td>
 </tr>
 <tr>
@@ -238,8 +238,8 @@
 </tr>
 <tr>
 <td>Avg HR on runs</td>
+<td>125 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
 <td>120</td>
-<td>—</td>
 <td>Z2 121–140</td>
 <td>—</td>
 </tr>
@@ -259,22 +259,22 @@
 <tbody>
 <tr>
 <td>Acute load (7-day)</td>
-<td>263 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>137</td>
+<td>—</td>
+<td>263</td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Acute:chronic ratio</td>
-<td>1.40 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>0.73</td>
+<td>—</td>
+<td>1.40</td>
 <td>0.8–1.3 safe, &gt;1.5 risky</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Intensity minutes</td>
-<td>780 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>690</td>
+<td>—</td>
+<td>780</td>
 <td>—</td>
 <td>—</td>
 </tr>
@@ -294,64 +294,64 @@
 <tbody>
 <tr>
 <td>HRV avg</td>
-<td>38.9 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>36.5</td>
+<td>—</td>
+<td>38.9</td>
 <td>41.6 baseline</td>
-<td>94%</td>
+<td>—</td>
 </tr>
 <tr>
 <td>Days HRV not balanced</td>
-<td>6 <span class="trend trend-bad" title="up on last week - the wrong direction" aria-label="up on last week - the wrong direction">↑</span></td>
-<td>1</td>
+<td>—</td>
+<td>6</td>
 <td>0 of 7</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Resting HR</td>
-<td>52.1 <span class="trend trend-level" title="level with last week" aria-label="level with last week">→</span></td>
-<td>52.7</td>
+<td>—</td>
+<td>52.1</td>
 <td>51 baseline</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Sleep (hr)</td>
-<td>8.7 <span class="trend trend-level" title="level with last week" aria-label="level with last week">→</span></td>
+<td>—</td>
 <td>8.7</td>
 <td>7.5+</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Deep sleep (%)</td>
-<td>13 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>12</td>
+<td>—</td>
+<td>13</td>
 <td>13–23 normal</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Body battery low</td>
-<td>20 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
-<td>25</td>
+<td>—</td>
+<td>20</td>
 <td>how empty you get</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Training readiness</td>
-<td>45 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
-<td>61</td>
+<td>—</td>
+<td>45</td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Stress avg</td>
-<td>31 <span class="trend trend-good" title="down on last week - the direction you want" aria-label="down on last week - the direction you want">↓</span></td>
-<td>33</td>
+<td>—</td>
+<td>31</td>
 <td>under 35</td>
 <td>—</td>
 </tr>
 <tr>
 <td>Respiration</td>
-<td>16.0 <span class="trend trend-level" title="level with last week" aria-label="level with last week">→</span></td>
-<td>15.7</td>
+<td>—</td>
+<td>16.0</td>
 <td>a jump can precede illness</td>
 <td>—</td>
 </tr>
@@ -371,15 +371,15 @@
 <tbody>
 <tr>
 <td>Endurance score</td>
-<td>4775 <span class="trend trend-bad" title="down on last week - the wrong direction" aria-label="down on last week - the wrong direction">↓</span></td>
-<td>4883</td>
+<td>—</td>
+<td>4775</td>
 <td>—</td>
 <td>—</td>
 </tr>
 <tr>
 <td>VO2 max</td>
-<td>42.1 <span class="trend trend-good" title="up on last week - the direction you want" aria-label="up on last week - the direction you want">↑</span></td>
-<td>41.6</td>
+<td>—</td>
+<td>42.1</td>
 <td>—</td>
 <td>—</td>
 </tr>
@@ -394,11 +394,9 @@
 </table></div>
 <h3>What this changes</h3>
 <ul>
-<li><strong>Acute:chronic 1.40, elevated.</strong> Not dangerous, but do not add on top of it.</li>
+<li><strong>94 ft per hour against a 292 target</strong> (race demands 508). Your hours are there; they are flat hours. Same time, steeper ground.</li>
 <li><strong>No night session.</strong> Zero banked against 3 cumulative this block, and it is the cheapest gap you have — one headlamp lap counts.</li>
-<li><strong>Longest day 2.1 hr against an 6-hour block peak.</strong> Single-day duration is the gap volume does not close.</li>
-<li><strong>HRV unbalanced 6 of 7 days.</strong> One bad night is noise; five is a signal.</li>
-<li><strong>Endurance score down 212 over 4 weeks</strong> (4987 → 4775). Volume is not converting into aerobic fitness yet.</li>
+<li><strong>Longest day 1.5 hr against an 6-hour block peak.</strong> Single-day duration is the gap volume does not close.</li>
 </ul>
 <h2>Last 13 weeks</h2>
 <div class="tw"><table>
@@ -422,14 +420,14 @@
 </thead>
 <tbody>
 <tr>
-<td>2026-09-14 <em>(partial)</em></td>
-<td>2</td>
-<td>4.4</td>
-<td>118</td>
-<td>58</td>
-<td>1</td>
-<td>2</td>
-<td>23</td>
+<td>2026-09-14</td>
+<td>5.6</td>
+<td>15.3</td>
+<td>528</td>
+<td>94</td>
+<td>1.5</td>
+<td>3.6</td>
+<td>44</td>
 <td>0</td>
 <td>—</td>
 <td>—</td>
