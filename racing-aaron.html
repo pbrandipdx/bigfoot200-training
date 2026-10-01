@@ -24,7 +24,7 @@ h3{font-size:1.1rem}
 header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;padding-bottom:14px;border-bottom:2px solid var(--ink)}
 .ruler{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
 .ruler b{color:var(--ink);font-weight:600}
-nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);display:flex;gap:4px;overflow-x:auto;padding-block:10px;z-index:5;border-bottom:1px solid var(--line)}
+nav{position:sticky;top:42px;background:var(--bg);display:flex;gap:4px;overflow-x:auto;padding-block:10px;z-index:5;border-bottom:1px solid var(--line)}
 nav button{font:600 .95rem var(--f-head);letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;cursor:pointer;white-space:nowrap}
 nav button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 nav button:focus-visible,.chip:focus-visible,.dbtn:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -75,7 +75,15 @@ footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);color:v
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap">
 
-<div class="wrap">
+<style id="bf-nav-css">
+  #bf-nav{position:sticky;top:0;z-index:999;display:flex;gap:0;background:#152B1D;
+    border-bottom:1px solid rgba(255,255,255,.14);overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #bf-nav a{flex:1 0 auto;text-align:center;padding:13px 16px;font:600 13px/1
+    -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;letter-spacing:.02em;
+    color:#B9C6B4;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent}
+  #bf-nav a[aria-current="page"]{color:#FBFBF8;border-bottom-color:#B0793A}
+  @media (max-width:420px){#bf-nav a{padding:12px 11px;font-size:12px}}
+</style><style>#bf-nav{margin-inline:-16px}</style><nav id="bf-nav"><a href="index.html">Today</a><a href="progress.html">Progress</a><a href="log.html">Log</a><a href="blocks.html">Blocks</a><a href="plan.html">Race plan</a><a href="weeks.html">Review</a><a href="racing-aaron.html" aria-current="page">Racing Aaron</a></nav><div class="wrap">
 <header>
   <div>
     <h1>Racing Aaron</h1>
