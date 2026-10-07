@@ -131,13 +131,13 @@
   #bf-nav a[aria-current="page"]{color:#FBFBF8;border-bottom-color:#B0793A}
   @media (max-width:420px){#bf-nav a{padding:12px 11px;font-size:12px}}
 </style>
-<nav id="bf-nav"><a href="index.html">Today</a><a href="progress.html">Progress</a><a href="log.html" aria-current="page">Log</a><a href="blocks.html">Blocks</a><a href="plan.html">Race plan</a><a href="weeks.html">Review</a></nav>
+<nav id="bf-nav"><a href="index.html">Today</a><a href="progress.html">Progress</a><a href="log.html" aria-current="page">Log</a><a href="blocks.html">Blocks</a><a href="plan.html">Race plan</a><a href="weeks.html">Review</a><a href="racing-aaron.html">Racing Aaron</a></nav>
 <div class="wrap">
 
 <header class="top">
   <div>
     <h1>Bigfoot 200 — Block Tracker</h1>
-    <div class="sub">Race Aug 13, 2027 · 200.1 mi · 44,082 ft gain / 45,563 ft loss · 107 hr limit · <strong>97:00 schedule, 100:00 goal</strong> · unsupported · 2.31 mph moving, 4:12 aid, 6:00 sleep</div>
+    <div class="sub">Race Aug 11, 2028 · 200.1 mi · 44,082 ft gain / 45,563 ft loss · 107 hr limit · <strong>97:00 schedule, 100:00 goal</strong> · unsupported · 2.31 mph moving, 4:12 aid, 6:00 sleep</div>
   </div>
   <div class="spacer"></div>
   <button id="themeBtn" title="Toggle light/dark">◐</button>
@@ -257,8 +257,8 @@ var SYNC = {"synced":"2026-09-06","source":"Strava","weeks":{"2026-05-25":{"hour
 /* ---------- plan model ---------- */
 var BASE = Date.UTC(2026, 8, 7);
 var NPLAN = 49;
-var RACE = Date.UTC(2027, 7, 13);
-var RACE_LABEL = "Aug 13, 2027";
+var RACE = Date.UTC(2028, 7, 11);
+var RACE_LABEL = "Aug 11, 2028";
 
 // Blocks and their display numbers come from plan/schedule.json, substituted by
 // dashboard/build.py. This file used to carry its own hardcoded copy and it had
@@ -266,8 +266,8 @@ var RACE_LABEL = "Aug 13, 2027";
 // from before the 2026-09-15 revision, night totals that matched nothing, and a
 // Block 2 that claimed to end with a 100-miler. The Log page was quietly showing
 // a different plan from every other page for days. One source now.
-var BLOCKS = [{"n": 1, "start": 0, "end": 13, "ends": "Frozen Trail Run Fest 50K — FIRST ULTRA", "peak": [6, 6], "nightCum": 3, "q": "Can you sustain a full day on feet and descend hard without wrecking your quads?"}, {"n": 2, "start": 13, "end": 22, "ends": "BURT 55K, then Hagg Mud 50K", "peak": [8, 8], "nightCum": 6, "q": "Can you go out again on tired legs, in bad weather, when nothing about it is enjoyable?"}, {"n": 3, "start": 22, "end": 31, "ends": "OPEN — Gorge Waterfalls 100K dropped Sep 2026. No 100K on the ladder and no backup WS qualifier; Eugene Marathon (Apr 25) sits just past this block in Block 4.", "peak": [10, 10], "nightCum": 12, "q": "Can you move competently in the dark for six hours, and clear a 17-hour cutoff?"}, {"n": 4, "start": 31, "end": 40, "ends": "Strawberry Fields Forever 100 — FIRST 100-MILER, the gate", "peak": [14, 14], "nightCum": 20, "q": "Can you go a hundred miles, controlled, with aid under 90 minutes? Sub-100 at Bigfoot is decided here."}, {"n": 5, "start": 40, "end": 48, "ends": "BIGFOOT 200", "peak": [16, 16], "nightCum": 30, "q": "Recover, peak once, then arrive fresh with sleep banked and heat in the legs."}];
-var BLOCK_DISPLAY = {"1": {"h": "12", "v": "3,500", "m": "45"}, "2": {"h": "14", "v": "5,000", "m": "50"}, "3": {"h": "16", "v": "6,500", "m": "55"}, "4": {"h": "18", "v": "8,000", "m": "60"}, "5": {"h": "21", "v": "10,000", "m": "65"}};
+var BLOCKS = [{"n": 1, "start": 0, "end": 13, "ends": "Frozen Trail Run Fest 50K — FIRST ULTRA", "peak": [6, 6], "nightCum": 3, "q": "Can you sustain a full day on feet and descend hard without wrecking your quads?"}, {"n": 2, "start": 13, "end": 22, "ends": "Optional BURT 55K (Feb 6) — a supported long day, not a race", "peak": [8, 8], "nightCum": 6, "q": "Can you go out again on tired legs, in bad weather, when nothing about it is enjoyable?"}, {"n": 3, "start": 22, "end": 31, "ends": "Gorge Waterfalls 100K, Apr 16 — FIRST 100K", "peak": [10, 10], "nightCum": 10, "q": "Can you move competently in the dark for six hours, and clear a 17-hour cutoff?"}, {"n": 4, "start": 31, "end": 48, "ends": "Bigfoot 200 2027 — as a volunteer, not a runner", "peak": [8, 8], "nightCum": 12, "q": "Can you go a hundred miles, controlled, with aid under 90 minutes? Sub-100 at Bigfoot is decided here."}, {"n": 5, "start": 49, "end": 59, "ends": "First 100-miler, mid-Oct 2027 — race TBD", "peak": [14, 14], "nightCum": 16, "q": "Recover, peak once, then arrive fresh with sleep banked and heat in the legs."}, {"n": 6, "start": 60, "end": 74, "ends": "no race — night hours and durability", "peak": [10, 10], "nightCum": 20, "q": ""}, {"n": 7, "start": 75, "end": 83, "ends": "one 50-miler or 100K tune-up, ~Apr 15 — optional if Oct 2027 went well", "peak": [12, 12], "nightCum": 26, "q": ""}, {"n": 8, "start": 84, "end": 92, "ends": "optional second 100 (late May) — only if the Oct 2027 hundred did not clear the gate", "peak": [16, 16], "nightCum": 32, "q": ""}, {"n": 9, "start": 93, "end": 100, "ends": "BIGFOOT 200", "peak": [18, 18], "nightCum": 40, "q": ""}];
+var BLOCK_DISPLAY = {"1": {"h": "12", "v": "3,500", "m": "45"}, "2": {"h": "13", "v": "4,000", "m": "45"}, "3": {"h": "14", "v": "5,000", "m": "50"}, "4": {"h": "11", "v": "3,500", "m": "40"}, "5": {"h": "15", "v": "6,000", "m": "50"}, "6": {"h": "13", "v": "5,000", "m": "45"}, "7": {"h": "16", "v": "6,500", "m": "55"}, "8": {"h": "18", "v": "8,000", "m": "60"}, "9": {"h": "20", "v": "10,000", "m": "60"}};
 
 var B5 = [
   {h:5,v:1000,m:15,tag:"Recovery — walks only"},
